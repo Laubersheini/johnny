@@ -1,2 +1,2 @@
 # johnny
-simulation of a von neumann arkitecture
+simulation of a von neumann arcitecture
