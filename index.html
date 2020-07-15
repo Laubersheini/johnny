@@ -1,0 +1,225 @@
+<!Doctype HTML>
+
+<!--
+David Laubersheimer - 2019
+
+mit dank an Dr. Peter Dauscher
+
+
+-->
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, height=device-height,initial-scale=1.0">
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="./style.css">
+	<title>Johnny 2.0 by David Laubersheimer</title>
+	<script>
+	var LoadStart = new Date().getTime();
+	</script>
+</head>
+
+<body onload="initialize()">
+<div id="startscreen">
+<p style="  font-size:15vmin ">Johnny 2.0</p>
+<p style="  font-size:7vmin " id="loading">Loading</p>
+<p style="  font-size:6vmin ">Simulation of a simplified Von Neumann Computer</p>
+<p style="  font-size:4vmin">David Laubersheimer</p>
+<p style="  font-size:4vmin ">2019</p>
+<p style="  font-size:4vmin">Peter Dauscher</p>
+<p style="  font-size:4vmin ">2009-2014</p>
+</div>
+
+<div id="programm" style="display : none">
+	<!-- Bilder die die Datenbewegung anzeigen (reinfolge nicht verändern!) -->
+	<img src="./images/datamovement/dbram.png"  class="dataMovement"></img>
+	<img src="./images/datamovement/ramdb.png"  class="dataMovement"></img>
+	<img src="./images/datamovement/dbins.png"  class="dataMovement"></img>
+	<img src="./images/datamovement/dbacc.png"  class="dataMovement"></img>
+	<img src="./images/datamovement/accdb.png"  class="dataMovement"></img>
+	<img src="./images/datamovement/insmc.png"  class="dataMovement"></img>
+	<img src="./images/datamovement/insad.png"  class="dataMovement"></img>
+	<img src="./images/datamovement/inspc.png"  class="dataMovement"></img>
+	<img src="./images/datamovement/pcad.png"  class="dataMovement"></img>
+	<img src="./images/datamovement/equalZero.png"  class="dataMovement" style="display:block"></img>
+	<img src="./images/datamovement/crtCover.png" class="dataMovement" style="display:block"></img>
+	<div class="dataMovement" id="NullaccHighlight"></div>
+	<div class="dataMovement" id="IncaccHighlight"></div>
+	<div class="dataMovement" id="DecaccHighlight"></div>
+	<div class="dataMovement" id="NullMcHighlight"></div>
+	<div class="dataMovement" id="HaltButtonHighlight"></div>
+	<div class="dataMovement" id="IncPc0Highlight"></div>
+	<div class="dataMovement" id="IncPcHighlight"></div>
+
+
+
+
+	<!--Bilder der Kopfzeile -->
+	<div id="ramOptions">
+	<abbr title="New Ram"><img src="./images/new_macro.png" onclick="newRam()" class="icon" ></img></abbr>
+	<abbr title="Save ram as Johnny file"><img src="./images/save_ram.png" onclick="downloadRam()" class="icon" ></img></abbr>
+	<abbr title="Load ram file "><img src="./images/open_ram.png"  onclick="uploadRam()" class="icon" ></img></abbr>
+	<img src= "./images/platzhalter.png"class="icon"</img> <!-- dient als abstandshalter -->
+	<img src= "./images/platzhalter.png"class="icon"</img>
+
+
+	<abbr title="One macro step"><img src="./images/macro_step.png"  onclick="SingleMacroStep()" class="icon" ></img> </abbr>
+	<abbr title="Run Programm"><img src="./images/macro_run.png"  onclick="executeProgramm()" class="icon"  ></img></abbr>
+	<abbr title="Programm execution speed"><input type="range" min="0" max="3000" step="1.0" onchange="updateSpeed()" id="executeSpeedSlider"></abbr>
+	<abbr title="Pause programm"><img src="./images/macro_pause.png"  onclick="pauseProgramm()" class="icon"  ></img></abbr>
+	<abbr title="Reset"><img src="./images/reset.png"  onclick="resetComputer()"  class="icon"  ></img></abbr>
+	</div>
+
+	<div id="mcOptions" class="control">
+	<abbr title="One micro step"><img src="./images/micro_step.png"  onclick="microStep(true)" class="icon" ></img></abbr>
+	<abbr title="Save microcode as mc file"><img src="./images/save_micro.png" onclick="downloadMc()" class="icon" ></img></abbr>
+	<abbr title="load microcode file"><img src="./images/open_micro.png"  onclick="uploadMc()" class="icon"></img></abbr>
+	</div>
+
+
+	<div id="controlUnitToggle">
+	<img src="./images/show_command.png"  id="crtIcon"  ></img>
+	<input  type="checkbox" onchange="ToggleControlUnit()">
+	</div>
+
+
+	<div id="recordMcPanel" class="control">
+	<abbr title="Record macrocode"><img src="./images/macro_rec.png"  onclick="aufnahme()" class="icon" ></img></abbr>
+	<abbr title="Address in micro programm memory of new Macrocode "><input type="number" id="aufnahmeZahl"   step="10" min="0" max="200" value="110"></abbr>
+	<abbr title="Name of new macro program"><input type="text" id="aufnahmeName"  maxlength="5" value="NN"></abbr>
+	<button onclick="toggleBonsai"></button>
+	</div>
+
+	<button id="bonsaiModeButton" onclick="toggleBonsai()">bonsai mode</button>
+
+
+
+
+	<input type="number" id="AddressBusInput" min="0" max="999">
+	<input type="number" id="DataBusInput">
+	<p id="AddressBus">000</p>
+	<p id="DataBus">00000</p>
+	<p id="Accumulator">00000</p>
+	<p id="InstructionalRegister" class="control"><span style="color:#E5002D; font-size:3vmin" id="InsHi">00</span>.<span style="color:#207DFF; font-size:3vmin" id="InsLow">000</span></p>
+	<p id="ProgrammCounter" class="control">000</p>
+	<p id="MicoCodeCounter" class="control">000</p>
+	<p id="programmCounterText" class="control">Programm Counter</p>
+	<p id="equalZeroText">=0?</p>
+	<abbr title="set Data Bus"><button onclick="ManuellDb()" id="DbInputButton">ManuellDb</button> </abbr>
+	<abbr title="set Address Bus"><button onclick="ManuellAB()" id="ABInputButton">ManuellAb</button> </abbr>
+
+	<button onclick="RamDbClick()" id="RamDbButton">ram-->db</button>
+	<button onclick="DbRamClick()" id="DbRamButton">db-->ram</button>
+	<button onclick="DbAccClick()" id="DbAccButton">db-->acc</button>
+	<button onclick="AccDbClick()" id="AccDbButton">acc-->db</button>
+	<button onclick="NullAccClick()" id="NullAccButton" class="hiddenInBonsai">acc=0</button>
+	<button onclick="IncAccClick()" id="IncAccButton">acc++</button>
+	<button onclick="DecAccClick()" id="DecAccButton">acc--</button>
+	<button onclick="AddAccClick()" id="AddAccButton" class="hiddenInBonsai">plus</button>
+	<button onclick="SubAccClick()" id="SubAccButton" class="hiddenInBonsai">minus</button>
+	<button onclick="DbInsClick()" id="DbInsButton" class="control">db-->ins</button>
+	<button onclick="InsMcClick()" id="InsMcButton" class="control">ins-->mc</button>
+	<button onclick="InsAdClick()" id="InsAbButton" class="control">ins-->ab</button>
+	<button onclick="InsPcClick()" id="InsPcButton" class="control" >ins-->pc</button>
+	<button onclick="PcAdClick()" id="PcAbButton" class="control">pc-->ab</button>
+	<button onclick="NullMcClick()" id="NullMcButton" class="control">mc:=0</button>
+	<button onclick="IncPcClick()" id="IncPcButton" class="control">pc++</button>
+	<button onclick="IncPc0Click()" id="IncPc0Button" class="control">=0:pc++</button>
+	<button onclick="HaltClick()" id="HaltButton" class="control">stop</button>
+
+
+
+	<!--nicht entfernen onclick der Bilder greift hierdrauf zu -->
+	<input type='file' accept='.mc' id='microcodefile' style="display:none">
+	<input type='file' accept='.ram' id='ramfile'style="display:none">
+
+
+	<!-- Scollbare Tabelle -->
+<div id="RamDiv">
+
+
+	<table cellspacing="0" cellpadding="0" border="0" width="100%">
+  <tr>
+    <td>
+       <table cellspacing="0" cellpadding="0" border="1" width="100%" >
+         <tr style="color:#969696;background-color:#969696">
+            <th width=25%>Address</th>
+				<th width=25%>Data</th>
+				<th width=25%>Asm</th>
+				<th width=25%>Opnd</th>
+         </tr>
+       </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+       <div style="width:23vw; height:50vh; overflow:auto;" id="innerRamDiv" >
+         <table cellspacing="0" cellpadding="1" border="1" width="100%">
+					<tbody id="RamTBody">
+						<!-- hier wird in table.js die Tabelle eingefügt-->
+					</tbody>
+         </table>
+
+
+
+
+
+
+       </div>
+    </td>
+  </tr>
+</table>
+
+
+  </div>
+
+
+
+<div id="MicroCodeDiv" class="control">
+
+
+	<table cellspacing="0" cellpadding="0" border="0" width="100%" >
+  <tr>
+    <td>
+       <table cellspacing="0" cellpadding="1" border="1" width="100%" >
+
+       </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+       <div style="width:15vw; height:28vh; overflow:auto;" id="testdiv">
+         <table cellspacing="0" cellpadding="1" border="1" width="100%">
+					<tbody id="McTBody">
+
+					</tbody>
+         </table>
+       </div>
+    </td>
+  </tr>
+</table>
+  </div>
+
+
+
+<div id="RamEingabe">
+<p></p>
+<input type="Text" id="RamInput">
+<select id="CommandSelect" onchange="CommandSelectChange()">
+</select>
+<button onclick="ManuellRam()" id="RamInputButton">write</button>
+<p></p>
+</div>
+
+
+<script type="text/javascript" src="./script.js"></script>
+<script type="text/javascript" src="./microcode.js"></script>
+<script type="text/javascript" src="./table.js"></script>
+<script type="text/javascript" src="./buttons.js"></script>
+<script type="text/javascript" src="./writing.js"></script>
+<script type="text/javascript" src="./bonsai.js"></script>
+</div>
+
+
+</body>
+
+</html>
