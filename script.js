@@ -126,6 +126,11 @@ function resize(){
 	RamEingabeHeight = getObjectHeight(document.getElementById("RamEingabe"))  //neupositionierung des Peiles für die Rameingabe bei änderung der Größe
 	tabelHeight = getObjectHeight(document.getElementById(SelectetRamModule))
 	document.getElementById("RamEingabe").style.top = (document.getElementById(SelectetRamModule).getBoundingClientRect().top - RamEingabeHeight/2 + tabelHeight/2)+"px";
+
+	//needed for the Safari fix
+	scrollMaxX = document.body.scrollWidth - window.innerWidth;
+	scrollMaxY = document.body.scrollHeight - window.innerHeight;
+
 /*
 	//ändern der Auflösung des Bildschirms:
 	let canvasWidth =document.getElementById("screen").clientWidth
@@ -476,3 +481,25 @@ function highlightRamAccess(){//übernimmt auch das ändern der unteren Tabelle
 		console.log("hi")
 
 }
+
+
+//this is needed to prevent Safari (ipad) from making the background scroll funny
+var scrollX = 0;
+var scrollY = 0;
+var scrollMinX = 0;
+var scrollMinY = 0;
+var scrollMaxX = document.body.scrollWidth - window.innerWidth;
+var scrollMaxY = document.body.scrollHeight - window.innerHeight;
+
+// where the magic happens
+window.addEventListener('scroll', function (e) {
+	e.preventDefault();
+  scrollX = window.scrollX;
+  scrollY = window.scrollY;
+
+  if (scrollX <= scrollMinX) scrollTo(scrollMinX, window.scrollY);
+  if (scrollX >= scrollMaxX) scrollTo(scrollMaxX, window.scrollY);
+
+  if (scrollY <= scrollMinY) scrollTo(window.scrollX, scrollMinY);
+  if (scrollY >= scrollMaxY) scrollTo(window.scrollX, scrollMaxY);
+}, false);

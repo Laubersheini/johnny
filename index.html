@@ -210,13 +210,16 @@ mit dank an Dr. Peter Dauscher
 <p></p>
 </div>
 
-
+<script type="text/javascript" src="./viewport-units-buggyfill/viewport-units-buggyfill.js"></script>
 <script type="text/javascript" src="./script.js"></script>
 <script type="text/javascript" src="./microcode.js"></script>
 <script type="text/javascript" src="./table.js"></script>
 <script type="text/javascript" src="./buttons.js"></script>
 <script type="text/javascript" src="./writing.js"></script>
 <script type="text/javascript" src="./bonsai.js"></script>
+<script>viewportUnitsBuggyfill.init({force: true}); //does this make it worse for everyone? almost for sure but ipads are the thing for schools now :(
+// TODO: detect Safari and only apply this option when its actually Safari;
+</script>
 </div>
 
 
