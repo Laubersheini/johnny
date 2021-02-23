@@ -50,8 +50,10 @@ mit dank an Dr. Peter Dauscher
 	var startScreenFadeOutTime = 3000; // für den Ladebildschirm
 	var loaded = false;
 
+	const ramSize = 10000  //this ideally has to be a multiple of 10
+	const ramLength = Math.log10(ramSize) +1;
 	var Ram = [];
-	for(i=0;i<1000;i++){
+	for(i=0;i<ramSize;i++){
 	Ram[i] =0;
 
     }
@@ -273,10 +275,10 @@ function SingleMacroStep(){
 
 //für Ram
 function AddOpnd(Address){
-	high = parseInt(zeroPad(Ram[Address],5).substr(0, 2)) +200; //+200 um auslesen aus Microcode zu vereinfachen
+	high = parseInt(zeroPad(Ram[Address],ramLength +1 ).substr(0, 2)) +200; //+200 um auslesen aus Microcode zu vereinfachen
 	if(MicroCode[high]!= undefined && high!=200){
 	document.getElementsByClassName("col4")[Address].innerHTML = MicroCode[high];
-	document.getElementsByClassName("col5")[Address].innerHTML = parseInt(zeroPad(Ram[Address],5).substr(2,5));
+	document.getElementsByClassName("col5")[Address].innerHTML = parseInt(zeroPad(Ram[Address],ramLength +1 ).substr(2,ramLength +1));
 	}else
 	{
 	document.getElementsByClassName("col4")[Address].innerHTML ="";

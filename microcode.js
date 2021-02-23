@@ -1,5 +1,5 @@
 function SingleMicroStep(){//legacy(entfernen)?
-	
+
 	microStep();
 //console.log(SingleMicroStep.caller)
 }
@@ -9,38 +9,38 @@ function SingleMicroStep(){//legacy(entfernen)?
 
 
 function microStep(display){
-switch(parseInt(MicroCode[MicroCodeCounter]))	{	
+switch(parseInt(MicroCode[MicroCodeCounter]))	{
 case 2://
 RamDb();
 MicroCodeCounter++;
 if(display){
 	FadeIn(1);
-	setTimeout(FadeOut, blockFadeoutTime,1)	
+	setTimeout(FadeOut, blockFadeoutTime,1)
 }
 break;
-	
+
 case 1://
 DbRam();
 MicroCodeCounter++;
 if(display){
 	FadeIn(0);
 	setTimeout(FadeOut, blockFadeoutTime,0)
-	
-	
+
+
 }
-break;	
+break;
 
 case 13://
 AddAcc();
 MicroCodeCounter++;
 if(display){
 	FadeIn(3);
-	setTimeout(FadeOut, blockFadeoutTime,3)	
-	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,3)
+
+
+
 }
-break;	
+break;
 
 
 case 14://
@@ -48,12 +48,12 @@ SubAcc();
 MicroCodeCounter++;
 if(display){
 	FadeIn(3);
-	setTimeout(FadeOut, blockFadeoutTime,3)	
-	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,3)
+
+
+
 }
-break;	
+break;
 
 case 12://
 NullAcc();
@@ -61,17 +61,17 @@ MicroCodeCounter++;
 if(display){
 FadeIn(11);
 	setTimeout(FadeOut, blockFadeoutTime,13)
-}	
-break;	
+}
+break;
 
 case 18://
 DbAcc();
 MicroCodeCounter++;
 if(display){
 	FadeIn(3);
-	setTimeout(FadeOut, blockFadeoutTime,3)	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,3)
+
+
 }
 
 break;
@@ -81,9 +81,9 @@ AccDb();
 MicroCodeCounter++;
 if(display){
 	FadeIn(4);
-	setTimeout(FadeOut, blockFadeoutTime,4)	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,4)
+
+
 }
 
 break;
@@ -96,7 +96,7 @@ MicroCodeCounter++;
 if(display){
 FadeIn(12);
 	setTimeout(FadeOut, blockFadeoutTime,12)
-}	
+}
 
 break;
 
@@ -106,7 +106,7 @@ MicroCodeCounter++;
 if(display){
 FadeIn(13);
 	setTimeout(FadeOut, blockFadeoutTime,13)
-}	
+}
 break;
 
 case 3://
@@ -114,20 +114,20 @@ DbIns();
 MicroCodeCounter++;
 if(display){
 	FadeIn(2);
-	setTimeout(FadeOut, blockFadeoutTime,2)	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,2)
+
+
 }
 break;
 
 case 5://
 InsMc();
 if(display){
-	
+
 	FadeIn(5);
-	setTimeout(FadeOut, blockFadeoutTime,5)	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,5)
+
+
 }
 break;
 
@@ -136,10 +136,10 @@ InsPc();
 MicroCodeCounter++;
 if(display){
 	FadeIn(7);
-	setTimeout(FadeOut, blockFadeoutTime,7)	
-	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,7)
+
+
+
 }
 break;
 
@@ -147,11 +147,11 @@ case 4://
 InsAd();
 MicroCodeCounter++;
 if(display){
-	
+
 	FadeIn(6);
-	setTimeout(FadeOut, blockFadeoutTime,6)	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,6)
+
+
 }
 break;
 
@@ -160,31 +160,31 @@ PcAd();
 MicroCodeCounter++;
 if(display){
 	FadeIn(8);
-	setTimeout(FadeOut, blockFadeoutTime,8)	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,8)
+
+
 }
 break;
-	
+
 case 7://
 NullMc();
 
 if(display){
 	FadeIn(14);
-	setTimeout(FadeOut, blockFadeoutTime,14)	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,14)
+
+
 }
 break;
 
 case 9://
-IncPc();			
+IncPc();
 MicroCodeCounter++;
 if(display){
 	FadeIn(17);
-	setTimeout(FadeOut, blockFadeoutTime,17)	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,17)
+
+
 }
 break;
 
@@ -194,9 +194,9 @@ MicroCodeCounter++;
 
 if(display){
 	FadeIn(16);
-	setTimeout(FadeOut, blockFadeoutTime,16)	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,16)
+
+
 }
 break;
 
@@ -206,9 +206,9 @@ MicroCodeCounter++;
 
 if(display){
 	FadeIn(15);
-	setTimeout(FadeOut, blockFadeoutTime,15)	
-	
-	
+	setTimeout(FadeOut, blockFadeoutTime,15)
+
+
 }
 break;
 
@@ -218,12 +218,12 @@ alert("Kein Befehl in Microcodeadresse " + MicroCodeCounter + " Das Programm wir
 Halt();
 NullMc();
 break
-						
+
 }//switch
-document.getElementById("MicoCodeCounter").innerText = zeroPad(MicroCodeCounter,3);	
+document.getElementById("MicoCodeCounter").innerText = zeroPad(MicroCodeCounter,ramLength -1);
 
 	if(MicroCodeCounter >0){
-	document.getElementsByClassName("MicroCodeTable")[MicroCodeCounter-1].style.background = "" 
+	document.getElementsByClassName("MicroCodeTable")[MicroCodeCounter-1].style.background = ""
 	}
 	highlightMc(MicroCodeCounter)
 
@@ -236,7 +236,7 @@ document.getElementById("MicoCodeCounter").innerText = zeroPad(MicroCodeCounter,
 function RamDb(){
 	Datenbus = Ram[Addressbus];
 	highlightRamAccess()
-	document.getElementById("DataBus").innerHTML = zeroPad(Datenbus,5);
+	document.getElementById("DataBus").innerHTML = zeroPad(Datenbus,ramLength+1);
 	aufnehmen(2);
 }
 
@@ -249,22 +249,22 @@ function DbRam(){
 
 function DbAcc(){
 	Akkumulator = Datenbus;
-	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,5)	
-	
+	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,ramLength +1 )
+
 	if(Akkumulator == 0){
 		FadeIn(9);
 	}else{
 		FadeOut(9);
-		
+
 	}
-aufnehmen(18);	
+aufnehmen(18);
 }
 
 
 
 function AccDb(){
 	Datenbus = Akkumulator;
-	document.getElementById("DataBus").innerHTML = zeroPad(Datenbus,5)
+	document.getElementById("DataBus").innerHTML = zeroPad(Datenbus,ramLength +1 )
 	aufnehmen(15);
 }
 
@@ -278,60 +278,60 @@ function NullAcc(){
 
 function IncAcc(){
 	if(Akkumulator<19999)Akkumulator++;
-	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,5)	
+	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,ramLength +1 )
 	aufnehmen(16);
 	FadeOut(9);
-	
 
-	
+
+
 	}
 
 function DecAcc(){
 	if(Akkumulator>0)Akkumulator--;
-	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,5)	
+	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,ramLength +1 )
 	if(Akkumulator == 0){
 		FadeIn(9);
 	}else{
 		FadeOut(9);
-		
+
 	}
-	
-	
-	
+
+
+
 	aufnehmen(17);
-	
-	
+
+
 	}
 
 function AddAcc(){
 	if(Akkumulator+Datenbus<20000){
 	Akkumulator+=Datenbus;
 	}else Akkumulator= 19999;
-	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,5)	
+	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,ramLength +1 )
 	aufnehmen(13);
-	
-	
+
+
 	if(Akkumulator == 0){
 		FadeIn(9);
 	}else{
 		FadeOut(9);
-		
+
 	}
 	}
 
 function SubAcc(){
 	if(Akkumulator-Datenbus>=0){
-	Akkumulator-=Datenbus;	
-		
+	Akkumulator-=Datenbus;
+
 	}else {Akkumulator=0;}
-	
-	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,5)	
-	
+
+	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,ramLength +1 )
+
 if(Akkumulator == 0){
 		FadeIn(9);
 	}else{
 		FadeOut(9);
-		
+
 	}
 	aufnehmen(14);
 	}
@@ -342,18 +342,19 @@ function DbIns(){
 	}
 
 function InsMc(){
-	writeToMc( Math.floor(ins/1000)*10	)
+	console.log( Math.floor(ins/ramSize)*10);
+	writeToMc( Math.floor(ins/ramSize)*10	) //get only the opcode
 	aufnehmen(5);
 }
 
 function InsAd(){
-writeToAddressBus(zeroPad(ins,5).substr(2,5));
-aufnehmen(4);	
+writeToAddressBus(zeroPad(ins,ramLength +1).substr(2,ramLength + 1));
+aufnehmen(4);
 }
 
 
 function InsPc(){
-	writeToPc(zeroPad(ins,5).substr(2,5))
+	writeToPc(zeroPad(ins,ramLength +1).substr(2,ramLength + 1))
 	aufnehmen(11);
 	}
 
@@ -364,7 +365,7 @@ function PcAd(){
 
 function NullMc(){
 //	MicroCodeCounter = 0;
-//	document.getElementById("MicroCodeCaption").innerHTML = "000";	
+//	document.getElementById("MicroCodeCaption").innerHTML = "000";
 	writeToMc(0)
 	aufnehmen(7);
 
@@ -383,7 +384,7 @@ if(Programmzaeler<999 && Akkumulator == 0){
 writeToPc(Programmzaeler +1)
 }
 
-aufnehmen(10);	
+aufnehmen(10);
 }
 
 
