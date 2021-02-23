@@ -277,7 +277,7 @@ function NullAcc(){
 }
 
 function IncAcc(){
-	if(Akkumulator<19999)Akkumulator++;
+	if(Akkumulator<(1 +"9".repeat(ramLength)).toString())Akkumulator++;
 	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,ramLength +1 )
 	aufnehmen(16);
 	FadeOut(9);
@@ -306,7 +306,7 @@ function DecAcc(){
 function AddAcc(){
 	if(Akkumulator+Datenbus<20000){
 	Akkumulator+=Datenbus;
-	}else Akkumulator= 19999;
+	}else Akkumulator= (1 +"9".repeat(ramLength)).toString();
 	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,ramLength +1 )
 	aufnehmen(13);
 
@@ -372,7 +372,7 @@ function NullMc(){
 }
 
 function IncPc(){
-if(Programmzaeler<999){
+if(Programmzaeler< parseInt("9".repeat(ramLength-1))){
 writeToPc(Programmzaeler +1)
 
 }
@@ -380,7 +380,7 @@ aufnehmen(9);
 }
 
 function IncPc0(){
-if(Programmzaeler<999 && Akkumulator == 0){
+if(Programmzaeler< parseInt("9".repeat(ramLength-1)) && Akkumulator == 0){
 writeToPc(Programmzaeler +1)
 }
 

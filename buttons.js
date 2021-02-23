@@ -179,6 +179,7 @@ function ToggleControlUnit(){
 }
 
 
+
 function resetComputer(){
 
 	writeToAddressBus(0);
@@ -213,19 +214,19 @@ function ManuellRam(){
 
 	//ignorieren des Punktes der hi und low trennt
 	var input = document.getElementById("RamInput").value.split(numberDevisionChar)
-	writeToRam(CheckNumber(parseInt(input.join("")),19999,0),SelectetRamModule)
+	writeToRam(CheckNumber(parseInt(input.join("")),(1 +"9".repeat(ramLength)).toString(),0),SelectetRamModule)
 	nextRamModule();
 	}
 
 function ManuellDb(){
-writeToDb(CheckNumber(parseInt(document.getElementById("DataBusInput").value),19999,0))
+writeToDb(CheckNumber(parseInt(document.getElementById("DataBusInput").value),(1 +"9".repeat(ramLength)).toString(),0))
 
 
 
 }
 function ManuellAB(){
 
-writeToAddressBus(CheckNumber(parseInt(document.getElementById("AddressBusInput").value),999,0))
+writeToAddressBus(CheckNumber(parseInt(document.getElementById("AddressBusInput").value),("9".repeat(ramLength-1)).toString(),0))
 
 
 }

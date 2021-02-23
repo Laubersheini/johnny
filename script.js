@@ -23,7 +23,11 @@ mit dank an Dr. Peter Dauscher
 
 	//daten die nicht zurückgesetzt werden müssen
 	var bonsai = false;
-
+/*
+	var screenShown = false;
+	var resolution = 50; //allways square
+	var pixelSize;
+*/
 	var timeoutforexecution  //zum abbrechen des ausführen des Programms
 	var alterProgrammzaeler= 0;
 	var geschwindigkeit = 1700; // intervall in dem Befehle ausgeführt werden
@@ -122,6 +126,13 @@ function resize(){
 	RamEingabeHeight = getObjectHeight(document.getElementById("RamEingabe"))  //neupositionierung des Peiles für die Rameingabe bei änderung der Größe
 	tabelHeight = getObjectHeight(document.getElementById(SelectetRamModule))
 	document.getElementById("RamEingabe").style.top = (document.getElementById(SelectetRamModule).getBoundingClientRect().top - RamEingabeHeight/2 + tabelHeight/2)+"px";
+/*
+	//ändern der Auflösung des Bildschirms:
+	let canvasWidth =document.getElementById("screen").clientWidth
+	document.getElementById("screen").width = canvasWidth;
+	document.getElementById("screen").height = canvasWidth;
+	pixelSize = canvasWidth/resolution;
+*/
 }
 
 function RamInputKeydown(e){
@@ -380,7 +391,7 @@ function pauseProgramm(){
 function nextRamModule(){
 	//entfärben of Ram
 document.getElementById(SelectetRamModule).style.background = "";
-if(SelectetRamModule<999){
+if(SelectetRamModule< parseInt("9".repeat(ramLength-1)) ){
 
 	SelectetRamModule++}
 
