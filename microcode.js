@@ -277,7 +277,7 @@ function NullAcc(){
 }
 
 function IncAcc(){
-	if(Akkumulator<(1 +"9".repeat(ramLength)).toString())Akkumulator++;
+	if(Akkumulator<parseInt(1 +"9".repeat(ramLength))){ Akkumulator++};
 	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,ramLength +1 )
 	aufnehmen(16);
 	FadeOut(9);
@@ -304,7 +304,7 @@ function DecAcc(){
 	}
 
 function AddAcc(){
-	if(Akkumulator+Datenbus<20000){
+	if(Akkumulator+Datenbus<"2" + "0".repeat(ramLength)){
 	Akkumulator+=Datenbus;
 	}else Akkumulator= (1 +"9".repeat(ramLength)).toString();
 	document.getElementById("Accumulator").innerHTML = zeroPad(Akkumulator,ramLength +1 )
