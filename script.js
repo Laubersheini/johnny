@@ -54,7 +54,7 @@ mit dank an Dr. Peter Dauscher
 	var startScreenFadeOutTime = 3000; // für den Ladebildschirm
 	var loaded = false;
 
-	const ramSize = 10000  //this ideally has to be a multiple of 10
+	const ramSize = 1000  //this ideally has to be a multiple of 10
 	const ramLength = Math.log10(ramSize) +1;
 	var Ram = [];
 	for(i=0;i<ramSize;i++){
