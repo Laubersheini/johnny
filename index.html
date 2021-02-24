@@ -1,11 +1,26 @@
 <!Doctype HTML>
 
 <!--
-David Laubersheimer - 2019
+
+Johnny 2.0
+Copyright (C) 2019,2021  David Laubersheimer
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
 
 mit dank an Dr. Peter Dauscher
-
-
 -->
 <html>
 <head>
@@ -86,10 +101,12 @@ mit dank an Dr. Peter Dauscher
 	<abbr title="Record macrocode"><img src="./images/macro_rec.png"  onclick="aufnahme()" class="icon" ></img></abbr>
 	<abbr title="Address in micro programm memory of new Macrocode "><input type="number" id="aufnahmeZahl"   step="10" min="0" max="200" value="110"></abbr>
 	<abbr title="Name of new macro program"><input type="text" id="aufnahmeName"  maxlength="5" value="NN"></abbr>
-	<button onclick="toggleBonsai"></button>
+	<!--<button onclick="toggleBonsai"></button> how tf did this slip troug TODO: was this neded in any way? -->
 	</div>
 
-	<button id="bonsaiModeButton" onclick="toggleBonsai()">bonsai mode</button>
+
+	<!-- Trigger/Open The Modal -->
+	<button id="settings_button">settings</button>
 
 
 
@@ -210,6 +227,21 @@ mit dank an Dr. Peter Dauscher
 <p></p>
 </div>
 
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+ <!-- Modal content -->
+ <div class="modal-content">
+	 <span class="close">&times;</span>
+	 <button id="bonsaiModeButton" onclick="toggleBonsai()">bonsai mode</button>
+	 <p>This programm is licences under the GNU Affero General Public License. You can find the sourcecode at <a href="https://github.com/laubersheini/johnny">https://github.com/laubersheini/johnny</a></p>
+	 <p>Feel free to report any bugs on the programms <a href="https://github.com/laubersheini/johnny/issues">Github page<a>.</a></p>
+ </div>
+
+</div>
+
 <script type="text/javascript" src="./viewport-units-buggyfill/viewport-units-buggyfill.js"></script>
 <script type="text/javascript" src="./script.js"></script>
 <script type="text/javascript" src="./microcode.js"></script>
@@ -217,11 +249,12 @@ mit dank an Dr. Peter Dauscher
 <script type="text/javascript" src="./buttons.js"></script>
 <script type="text/javascript" src="./writing.js"></script>
 <script type="text/javascript" src="./bonsai.js"></script>
+<script type="text/javascript" src="./settings.js"></script>
 <script>{
 		let ua = window.navigator.userAgent;
 	//	if( !!ua.match(/iPad/i) || !!ua.match(/iPhone/i)){
 
-    if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
+    if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){ //this seems to detect mobile browsers(which need this the most )
 		viewportUnitsBuggyfill.init({force: true}); //does this make it worse for everyone? almost for sure but ipads are the thing for schools now :(
 		}
 
