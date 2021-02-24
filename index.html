@@ -9,12 +9,12 @@ mit dank an Dr. Peter Dauscher
 -->
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, height=device-height,initial-scale=1.0">
+	<!-- <meta name="viewport" content="width=device-width, height=device-height,initial-scale=1.0">-->
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type="text/css" href="./style.css">
 	<title>Johnny 2.0 by David Laubersheimer</title>
 	<script>
-	var LoadStart = new Date().getTime();
+	var LoadStart = new Date().getTime();//this is so that the splash screen is always on for the same time
 	</script>
 </head>
 
@@ -217,8 +217,16 @@ mit dank an Dr. Peter Dauscher
 <script type="text/javascript" src="./buttons.js"></script>
 <script type="text/javascript" src="./writing.js"></script>
 <script type="text/javascript" src="./bonsai.js"></script>
-<script>viewportUnitsBuggyfill.init({force: true}); //does this make it worse for everyone? almost for sure but ipads are the thing for schools now :(
-// TODO: detect Safari and only apply this option when its actually Safari;
+<script>{
+		let ua = window.navigator.userAgent;
+	//	if( !!ua.match(/iPad/i) || !!ua.match(/iPhone/i)){
+
+    if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
+		viewportUnitsBuggyfill.init({force: true}); //does this make it worse for everyone? almost for sure but ipads are the thing for schools now :(
+		}
+
+//this apperantly also fixes chrome mobile?
+}
 </script>
 </div>
 

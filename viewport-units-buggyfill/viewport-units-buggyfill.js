@@ -172,14 +172,14 @@
         window.addEventListener('orientationchange', _refresh, true);
         // orientationchange might have happened while in a different window
         window.addEventListener('pageshow', _refresh, true);
-
+/*
         if (options.force || isBuggyIE || inIframe()) {
           window.addEventListener('resize', _refresh, true);
           options._listeningToResize = true;
         }
-
+*/
         options.hacks && options.hacks.initializeEvents(options, refresh, _refresh);
-
+          options._listeningToResize = false;
         refresh();
       });
     }

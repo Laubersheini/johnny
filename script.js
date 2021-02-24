@@ -482,7 +482,7 @@ function highlightRamAccess(){//übernimmt auch das ändern der unteren Tabelle
 
 }
 
-
+/*
 //this is needed to prevent Safari (ipad) from making the background scroll funny
 var scrollX = 0;
 var scrollY = 0;
@@ -503,3 +503,4 @@ window.addEventListener('scroll', function (e) {
   if (scrollY <= scrollMinY) scrollTo(window.scrollX, scrollMinY);
   if (scrollY >= scrollMaxY) scrollTo(window.scrollX, scrollMaxY);
 }, false);
+*/
