@@ -28,16 +28,5 @@
   "files": [
     "viewport-units-buggyfill.js",
     "viewport-units-buggyfill.hacks.js"
-  ],
-  "scripts": {
-    "lint": "eslint *.js",
-    "lint:fix": "eslint --fix *.js"
-  },
-  "devDependencies": {
-    "eslint": "^3.17.1",
-    "eslint-config-semistandard": "^8.0.0",
-    "eslint-config-standard": "^7.0.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^2.1.1"
-  }
+  ]
 }
