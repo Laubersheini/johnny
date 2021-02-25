@@ -4,6 +4,7 @@ function writeToRam(Value,Address){
 	document.getElementsByClassName("col2")[Address].innerHTML = zeroPad(Value,ramLength +1).substr(0, 2)+ "." + zeroPad(Value,ramLength +1).substr(2,ramLength +1)
 	//document.getElementsByClassName("col3")[Address].innerHTML ="";
 	AddOpnd(Address);
+	localStorage.setItem('johnny-ram', JSON.stringify(Ram));
 	}
 
 function writeToAddressBus(number){

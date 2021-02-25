@@ -56,11 +56,15 @@ mit dank an Dr. Peter Dauscher
 
 	const ramSize = 1000  //this ideally has to be a multiple of 10
 	const ramLength = Math.log10(ramSize) +1;
-	var Ram = [];
-	for(i=0;i<ramSize;i++){
-	Ram[i] =0;
+
+	var Ram = JSON.parse(localStorage.getItem('johnny-ram'));
+	if(Ram == null){//default if local store has been cleared or johnny is started for the first time
+		Ram = [];
+		for(i=0;i<ramSize;i++){
+			Ram[i] =0;
 
     }
+		}
 
 
 //funktionen ohne Zuordnung
