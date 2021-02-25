@@ -83,6 +83,7 @@ function initialize(){
 
 
 	document.getElementById("executeSpeedSlider").value = geschwindigkeit;
+	document.getElementById("controlUnitCheckbox").checked = false;
 
 	document.getElementById("AddressBusInput").addEventListener("keydown",AddressBusInputKeydown);//damit die Entertaste funktioniert
 	document.getElementById("DataBusInput").addEventListener("keydown",DataBusInputKeydown);
