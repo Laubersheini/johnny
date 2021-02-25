@@ -71,11 +71,16 @@ mit dank an Dr. Peter Dauscher
 function initialize(){
 	Befehlsauswahl = document.getElementById("CommandSelect");
 
-	microCodeString = "8;2;3;5;0;0;0;0;0;0;12;4;2;13;9;7;0;0;0;0;4;2;13;9;7;0;0;0;0;0;4;2;14;9;7;0;0;0;0;0;4;15;1;9;7;0;0;0;0;0;11;7;0;0;0;0;0;0;0;0;4;2;18;10;9;7;0;0;0;0;12;4;2;13;16;15;1;9;7;0;12;4;2;13;17;15;1;9;7;0;4;12;15;1;9;7;0;0;0;0;19;7;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;FETCH;TAKE;ADD;SUB;SAVE;JMP;TST;INC;DEC;NULL;HLT";
-	MicroCode =  microCodeString.split(";");
+		generateRam();
 
-	generateRam();
-	GenerateMicroCodeTable();
+	MicroCode = JSON.parse(localStorage.getItem('johnny-microcode'));
+	if(MicroCode == null){
+		resetMicrocode();
+	}else{
+		GenerateMicroCodeTable();
+	}
+
+
 
 	document.getElementById("executeSpeedSlider").value = geschwindigkeit;
 
@@ -228,7 +233,7 @@ function aufnahme(){
 	if(recording){
 		recording = false;
 		clearTimeout(timeoutforblinking);
-			document.getElementById("recordMcPanel").style.backgroundColor = "";
+		document.getElementById("recordMcPanel").style.backgroundColor = "";
 	}else{
 		recording = true;
 		recordingCounter = Math.floor(CheckNumber(parseInt(document.getElementById("aufnahmeZahl").value),200,0)/10)*10 // ignorieren der letzen stelle
@@ -271,6 +276,7 @@ document.getElementById('testdiv').scrollTop = topPos;
 	newtd2 = document.getElementsByClassName("Mccol2")[recordingCounter];
 	newtd2.innerText = microCodeToText(befehl);
 
+localStorage.setItem("johnny-microcode",JSON.stringify(MicroCode));
 
 recordingCounter++;
 }//if
