@@ -153,11 +153,12 @@ function IncPcClick(){
 
 function newRam(){
 	for(i=0;i<1000;i++){
-	Ram[i] =0;
+		Ram[i] =0;
+  }
 
-    }
+
 	generateRam();
-
+	localStorage.setItem("johnny-ram",JSON.stringify(Ram))
 
 }
 
