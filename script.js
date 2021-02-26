@@ -51,7 +51,7 @@ mit dank an Dr. Peter Dauscher
 	var RamEingabeHeight //positionierung des Pfeils
 	var tabelHeight
 
-	var startScreenFadeOutTime = 3000; // für den Ladebildschirm
+	var startScreenFadeOutTime = 1500; // für den Ladebildschirm
 	var loaded = false;
 
 	const ramSize = 1000  //this ideally has to be a multiple of 10
