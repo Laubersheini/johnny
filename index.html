@@ -22,20 +22,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 mit dank an Dr. Peter Dauscher
 -->
-<html>
+<html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, height=device-height,initial-scale=1.0">
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type="text/css" href="./style.css">
 	<link rel="manifest" href="./johnny.webmanifest">
-	<link rel="apple-touch-icon" sizes="256x256" href="./icons/firefox/firefox-general-256-256.png">	
+	<link rel="apple-touch-icon" sizes="256x256" href="./icons/firefox/firefox-general-256-256.png">
 	<title>Johnny 2.0 by David Laubersheimer</title>
 
 	<script>
 	var LoadStart = new Date().getTime();//this is so that the splash screen is always on for the same time
 
 	if ('serviceWorker' in navigator) {
-  //	navigator.serviceWorker.register('./service-worker.js');
+  	navigator.serviceWorker.register('./service-worker.js');
 	}
 
 	</script>
