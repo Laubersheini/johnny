@@ -97,7 +97,13 @@ function initialize(){
 	loaded = true;
 	document.getElementById("loading").innerText ="";
 	var loadEnd = new Date().getTime()
-	setTimeout(fadeOutStartScreen,startScreenFadeOutTime-(loadEnd-LoadStart));
+
+	if (window.matchMedia('(display-mode: standalone)').matches) {
+		fadeOutStartScreen();
+	}else{
+		setTimeout(fadeOutStartScreen,startScreenFadeOutTime-(loadEnd-LoadStart));
+	}
+
 	}//ende initialize
 
 

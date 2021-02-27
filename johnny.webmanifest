@@ -375,6 +375,6 @@
     "start_url": "./index.html",
     "display": "fullscreen",
     "orientation":  "landscape",
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff"
+    "theme_color": "#393e46",
+    "background_color": "#393e46"
 }
