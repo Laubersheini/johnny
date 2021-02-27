@@ -31,7 +31,7 @@ self.addEventListener('activate', event => {
     caches.keys().then(keys => Promise.all(
       keys.map(key => {
 
-        if (key.includes("johnny-cache")) {
+        if (key.includes("johnny-cache")) { //delete every chache from johnny that is now outdated
           return caches.delete(key);
         }
       })
