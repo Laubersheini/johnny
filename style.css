@@ -42,6 +42,10 @@ background-repeat: no-repeat;
 	max-height: 100vh;
 }
 
+.icon:hover {
+	filter: brightness(80%);
+}
+
 .control{
 	display:none;
 
