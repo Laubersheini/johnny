@@ -87,16 +87,18 @@ mit dank an Dr. Peter Dauscher
 	<img src= "./images/platzhalter.png"class="icon"</img>
 
 
-	<abbr title="One macro step"><img src="./images/macro_step.png"  onclick="SingleMacroStep()" class="icon"></img></abbr>
-	<abbr title="Run Programm"><img src="./images/macro_run.png"  onclick="executeProgramm()" class="icon"  ></img></abbr>
+
+	<abbr title="One macro step"><img src="./images/macro_step.png"  onclick="SingleMacroStep()" class="icon blackborder"></img></abbr>
+	<abbr title="Run Programm"><img src="./images/macro_run.png"  onclick="executeProgramm()" class="icon blackborder"  ></img></abbr>
+
 	<abbr title="Programm execution speed"><input type="range" min="0" max="3000" step="1.0" onchange="updateSpeed()" id="executeSpeedSlider"></abbr>
-	<abbr title="Pause programm"><img src="./images/macro_pause.png"  onclick="pauseProgramm()" class="icon"  ></img></abbr>
-	<abbr title="Reset"><img src="./images/reset.png"  onclick="resetComputer()"  class="icon"  ></img></abbr>
+	<abbr title="Pause programm"><img src="./images/macro_pause.png"  onclick="pauseProgramm()" class="icon blackborder"  ></img></abbr>
+	<abbr title="Reset"><img src="./images/reset.png"  onclick="resetComputer()"  class="icon blackborder"  ></img></abbr>
 	</div>
 
 	<div id="mcOptions" class="control">
 	<abbr title="new microcode"><img src="./images/new_micro.png"  onclick="resetMicrocode()" class="icon" ></img></abbr>
-	<abbr title="One micro step"><img src="./images/micro_step.png"  onclick="microStep(true)" class="icon" ></img></abbr>
+	<abbr title="One micro step"><img src="./images/micro_step.png"  onclick="microStep(true)" class="icon blackborder" ></img></abbr>
 	<abbr title="Save microcode as mc file"><img src="./images/save_micro.png" onclick="downloadMc()" class="icon" ></img></abbr>
 	<abbr title="load microcode file"><img src="./images/open_micro.png"  onclick="uploadMc()" class="icon"></img></abbr>
 	</div>
@@ -231,7 +233,7 @@ mit dank an Dr. Peter Dauscher
 
 <div id="RamEingabe">
 <p></p>
-<input type="Text" id="RamInput">
+<input type="Number" id="RamInput" step=0.001>
 <select id="CommandSelect" onchange="CommandSelectChange()">
 </select>
 <button onclick="ManuellRam()" id="RamInputButton">write</button>

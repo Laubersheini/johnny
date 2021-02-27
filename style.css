@@ -42,6 +42,15 @@ background-repeat: no-repeat;
 	max-height: 100vh;
 }
 
+.icon.blackborder{
+border: 1px solid black;
+
+}
+
+.icon:hover {
+	filter: brightness(80%);
+}
+
 .control{
 	display:none;
 
