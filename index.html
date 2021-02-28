@@ -80,9 +80,9 @@ mit dank an Dr. Peter Dauscher
 
 	<!--Bilder der Kopfzeile -->
 	<div id="ramOptions">
-	<abbr title="New Ram"><img src="./images/new_macro.png" onclick="newRam()" class="icon" ></img></abbr>
+	<abbr title="New Ram"><img src="./images/new_macro.svg" onclick="newRam()" class="icon" ></img></abbr>
 	<abbr title="Save ram as Johnny file"><img src="./images/save_ram.svg" onclick="downloadRam()" class="icon" ></img></abbr>
-	<abbr title="Load ram file "><img src="./images/open_ram.png"  onclick="uploadRam()" class="icon" ></img></abbr>
+	<abbr title="Load ram file "><img src="./images/open_ram.svg"  onclick="uploadRam()" class="icon" ></img></abbr>
 	<img src= "./images/platzhalter.png"class="icon"</img> <!-- dient als abstandshalter -->
 	<img src= "./images/platzhalter.png"class="icon"</img>
 
@@ -97,21 +97,21 @@ mit dank an Dr. Peter Dauscher
 	</div>
 
 	<div id="mcOptions" class="control">
-	<abbr title="new microcode"><img src="./images/new_micro.png"  onclick="resetMicrocode()" class="icon" ></img></abbr>
+	<abbr title="new microcode"><img src="./images/new_micro.svg"  onclick="resetMicrocode()" class="icon" ></img></abbr>
 	<abbr title="One micro step"><img src="./images/micro_step.png"  onclick="microStep(true)" class="icon blackborder" ></img></abbr>
 	<abbr title="Save microcode as mc file"><img src="./images/save_micro.svg" onclick="downloadMc()" class="icon" ></img></abbr>
-	<abbr title="load microcode file"><img src="./images/open_micro.png"  onclick="uploadMc()" class="icon"></img></abbr>
+	<abbr title="load microcode file"><img src="./images/open_micro.svg"  onclick="uploadMc()" class="icon"></img></abbr>
 	</div>
 
 
 	<div id="controlUnitToggle">
-	<img src="./images/show_command.png"  id="crtIcon"  ></img>
+	<img src="./images/show_control.svg"  id="crtIcon"  ></img>
 	<input id="controlUnitCheckbox" type="checkbox" onchange="ToggleControlUnit()">
 	</div>
 
 
 	<div id="recordMcPanel" class="control">
-	<abbr title="Record macrocode"><img src="./images/macro_rec.png"  onclick="aufnahme()" class="icon" ></img></abbr>
+	<abbr title="Record macrocode"><img src="./images/record_macro.svg"  onclick="aufnahme()" class="icon" ></img></abbr>
 	<abbr title="Address in micro programm memory of new Macrocode "><input type="number" id="aufnahmeZahl"   step="10" min="0" max="200" value="110"></abbr>
 	<abbr title="Name of new macro program"><input type="text" id="aufnahmeName"  maxlength="5" value="NN"></abbr>
 	<!--<button onclick="toggleBonsai"></button> how tf did this slip troug TODO: was this neded in any way? -->
