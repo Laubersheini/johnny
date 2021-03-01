@@ -80,38 +80,38 @@ mit dank an Dr. Peter Dauscher
 
 	<!--Bilder der Kopfzeile -->
 	<div id="ramOptions">
-	<abbr title="New Ram"><img src="./images/new_macro.svg" onclick="newRam()" class="icon" ></img></abbr>
-	<abbr title="Save ram as Johnny file"><img src="./images/save_ram.svg" onclick="downloadRam()" class="icon" ></img></abbr>
-	<abbr title="Load ram file "><img src="./images/open_ram.svg"  onclick="uploadRam()" class="icon" ></img></abbr>
+	<abbr title="New Ram"><img tabindex=0 src="./images/new_macro.svg" onclick="newRam()" class="icon" ></img></abbr>
+	<abbr title="Save ram as Johnny file"><img tabindex=0 src="./images/save_ram.svg" onclick="downloadRam()" class="icon" ></img></abbr>
+	<abbr title="Load ram file "><img tabindex=0 src="./images/open_ram.svg"  onclick="uploadRam()" class="icon" ></img></abbr>
 	<img src= "./images/platzhalter.png"class="icon"</img> <!-- dient als abstandshalter -->
 	<img src= "./images/platzhalter.png"class="icon"</img>
 
 
 
-	<abbr title="One macro step"><img src="./images/macro_step.png"  onclick="SingleMacroStep()" class="icon blackborder"></img></abbr>
-	<abbr title="Run Programm"><img src="./images/macro_run.png"  onclick="executeProgramm()" class="icon blackborder"  ></img></abbr>
+	<abbr title="One macro step"><img tabindex=0 src="./images/macro_step.png"  onclick="SingleMacroStep()" class="icon blackborder"></img></abbr>
+	<abbr title="Run Programm"><img tabindex=0 src="./images/macro_run.png"  onclick="executeProgramm()" class="icon blackborder"  ></img></abbr>
 
 	<abbr title="Programm execution speed"><input type="range" min="0" max="3000" step="1.0" onchange="updateSpeed()" id="executeSpeedSlider"></abbr>
-	<abbr title="Pause programm"><img src="./images/macro_pause.png"  onclick="pauseProgramm()" class="icon blackborder"  ></img></abbr>
-	<abbr title="Reset"><img src="./images/reset.png"  onclick="resetComputer()"  class="icon blackborder"  ></img></abbr>
+	<abbr title="Pause programm"><img tabindex=0 src="./images/macro_pause.png"  onclick="pauseProgramm()" class="icon blackborder"  ></img></abbr>
+	<abbr title="Reset"><img tabindex=0 src="./images/reset.png"  onclick="resetComputer()"  class="icon blackborder"  ></img></abbr>
 	</div>
 
 	<div id="mcOptions" class="control">
 	<abbr title="new microcode"><img src="./images/new_micro.svg"  onclick="resetMicrocode()" class="icon" ></img></abbr>
-	<abbr title="One micro step"><img src="./images/micro_step.png"  onclick="microStep(true)" class="icon blackborder" ></img></abbr>
-	<abbr title="Save microcode as mc file"><img src="./images/save_micro.svg" onclick="downloadMc()" class="icon" ></img></abbr>
-	<abbr title="load microcode file"><img src="./images/open_micro.svg"  onclick="uploadMc()" class="icon"></img></abbr>
+	<abbr title="One micro step"><img tabindex=0 src="./images/micro_step.png"  onclick="microStep(true)" class="icon blackborder" ></img></abbr>
+	<abbr title="Save microcode as mc file"><img tabindex=0 src="./images/save_micro.svg" onclick="downloadMc()" class="icon" ></img></abbr>
+	<abbr title="load microcode file"><img tabindex=0 src="./images/open_micro.svg"  onclick="uploadMc()" class="icon"></img></abbr>
 	</div>
 
 
 	<div id="controlUnitToggle">
-	<abbr title="show control unit"><img src="./images/show_control.svg"  id="crtIcon"  ></img></abbr>
+	<abbr title="show control unit"><img tabindex=0 src="./images/show_control.svg"  id="crtIcon"  ></img tabindex=0></abbr>
 	<abbr title="show control unit"><input id="controlUnitCheckbox" type="checkbox" onchange="ToggleControlUnit()"></abbr>
 	</div>
 
 
 	<div id="recordMcPanel" class="control">
-	<abbr title="Record macrocode"><img src="./images/record_macro.svg"  onclick="aufnahme()" class="icon" ></img></abbr>
+	<abbr title="Record macrocode"><img tabindex=0 src="./images/record_macro.svg"  onclick="aufnahme()" class="icon" ></img></abbr>
 	<abbr title="Address in micro programm memory of new Macrocode "><input type="number" id="aufnahmeZahl"   step="10" min="0" max="200" value="110"></abbr>
 	<abbr title="Name of new macro program"><input type="text" id="aufnahmeName"  maxlength="5" value="NN"></abbr>
 	<!--<button onclick="toggleBonsai"></button> how tf did this slip troug TODO: was this neded in any way? -->
