@@ -67,6 +67,8 @@ mit dank an Dr. Peter Dauscher
 		}
 
 
+var turboMode = false;
+
 //funktionen ohne Zuordnung
 function initialize(){
 	Befehlsauswahl = document.getElementById("CommandSelect");
@@ -203,7 +205,11 @@ function CheckNumber(X,maxValue,minValue){//Überprüft ob nur Zaheln eingegeben
 
 function updateSpeed(){
 	geschwindigkeit = 3000 -document.getElementById("executeSpeedSlider").value;
-
+	if(geschwindigkeit == 0){
+		turboMode = true;
+	}else{
+		turboMode = false;
+	}
 }
 
 
@@ -289,18 +295,27 @@ recordingCounter++;
 }//if
 
 }
-
+var maxRecursion = 15
+var currentRecursions = 0;
 function executeProgramm(){
 	//console.log("hi");
 	SingleMacroStep();
 	pause = false ;
 
 	if (!halt && alterProgrammzaeler != Programmzaeler){// beenden beim Halt und bei endlosschleifen durch fehlende oder einen jmp befehl auf die selbe adresse
-		timeoutforexecution  = setTimeout(executeProgramm, geschwindigkeit);}
+		if(currentRecursions <maxRecursion && turboMode){
+			currentRecursions++;
+			alterProgrammzaeler = Programmzaeler;
+			executeProgramm();
 
+		}else{
+		timeoutforexecution  = setTimeout(executeProgramm, geschwindigkeit);
+		currentRecursions =0;
+		}
 
 
 	alterProgrammzaeler = Programmzaeler;
+}
 }
 
 
@@ -316,8 +331,9 @@ function SingleMacroStep(){
 
 
 //für Ram
-function AddOpnd(Address){
+function AddOpnd(Address){ // TODO: should this be enabled in turbo mode?
 	high = parseInt(zeroPad(Ram[Address],ramLength +1 ).substr(0, 2)) +200; //+200 um auslesen aus Microcode zu vereinfachen
+
 	if(MicroCode[high]!= undefined && high!=200){
 	document.getElementsByClassName("col4")[Address].innerHTML = MicroCode[high];
 	document.getElementsByClassName("col5")[Address].innerHTML = parseInt(zeroPad(Ram[Address],ramLength +1 ).substr(2,ramLength +1));
@@ -438,6 +454,7 @@ document.getElementById(SelectetRamModule).style.background = "yellow";
 }
 
 function EditRam(CellNumber){
+
 //entfärben des alten Moduls
 	if(dataHighlightedRamModule != SelectetRamModule){
 		document.getElementById(SelectetRamModule).style.background = "";
@@ -465,7 +482,8 @@ document.getElementById(SelectetRamModule).style.background = "yellow";
 	document.getElementById("innerRamDiv").scrollTop = (SelectetRamModule-1) * tabelHeight;
 	document.getElementById("RamEingabe").style.top = (document.getElementById(SelectetRamModule).getBoundingClientRect().top - RamEingabeHeight/2 + tabelHeight/2)+"px"; //neupositionierung des Peiles für die Rameingabe
 	}
-}
+	}
+
 
 
 
