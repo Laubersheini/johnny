@@ -349,7 +349,9 @@ mit dank an Dr. Peter Dauscher
 				if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) { //this seems to detect mobile browsers(which need this the most )
 					viewportUnitsBuggyfill.init({ force: true }); //does this make it worse for everyone? almost for sure but ipads are the thing for schools now :(
 				}
-
+				// TODO simple bug fix for the elements at the bottom. Won't display them onload then
+				ToggleControlUnit();
+				ToggleControlUnit();
 
 			}
 		</script>
