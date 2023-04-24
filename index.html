@@ -57,17 +57,17 @@ mit dank an Dr. Peter Dauscher
 
 	<div id="programm" style="display : none">
 		<!-- Bilder die die Datenbewegung anzeigen (reinfolge nicht verändern!) -->
-		<img src="./images/datamovement/dbram.png" class="dataMovement"></img>
-		<img src="./images/datamovement/ramdb.png" class="dataMovement"></img>
-		<img src="./images/datamovement/dbins.png" class="dataMovement"></img>
-		<img src="./images/datamovement/dbacc.png" class="dataMovement"></img>
-		<img src="./images/datamovement/accdb.png" class="dataMovement"></img>
-		<img src="./images/datamovement/insmc.png" class="dataMovement"></img>
-		<img src="./images/datamovement/insad.png" class="dataMovement"></img>
-		<img src="./images/datamovement/inspc.png" class="dataMovement"></img>
-		<img src="./images/datamovement/pcad.png" class="dataMovement"></img>
-		<img src="./images/datamovement/equalZero.png" class="dataMovement" style="display:block"></img>
-		<img src="./images/datamovement/crtCover.png" class="dataMovement" style="display:block"></img>
+		<img src="./images/datamovement/dbram.png" class="dataMovement" />
+		<img src="./images/datamovement/ramdb.png" class="dataMovement" />
+		<img src="./images/datamovement/dbins.png" class="dataMovement" />
+		<img src="./images/datamovement/dbacc.png" class="dataMovement" />
+		<img src="./images/datamovement/accdb.png" class="dataMovement" />
+		<img src="./images/datamovement/insmc.png" class="dataMovement" />
+		<img src="./images/datamovement/insad.png" class="dataMovement" />
+		<img src="./images/datamovement/inspc.png" class="dataMovement" />
+		<img src="./images/datamovement/pcad.png" class="dataMovement" />
+		<img src="./images/datamovement/equalZero.png" class="dataMovement" style="display:block" />
+		<img src="./images/datamovement/crtCover.png" class="dataMovement" style="display:block" />
 		<div class="dataMovement" id="NullaccHighlight"></div>
 		<div class="dataMovement" id="IncaccHighlight"></div>
 		<div class="dataMovement" id="DecaccHighlight"></div>
@@ -80,64 +80,61 @@ mit dank an Dr. Peter Dauscher
 
 
 		<!--Bilder der Kopfzeile -->
-		<div id="ramOptions">
-			<abbr title="New Ram"><img tabindex=0 src="./images/new_macro.svg" onclick="newRam()"
-					class="icon"></img></abbr>
-			<abbr title="Save ram as Johnny file"><img tabindex=0 src="./images/save_ram.svg" onclick="downloadRam()"
-					class="icon"></img></abbr>
-			<abbr title="Load ram file "><img tabindex=0 src="./images/open_ram.svg" onclick="uploadRam()"
-					class="icon"></img></abbr>
-			<img src="./images/platzhalter.png" class="icon" </img> <!-- dient als abstandshalter -->
-			<img src="./images/platzhalter.png" class="icon" </img>
+		<nav id="control-nav">
+			<div id="ramOptions">
+				<div id="ramFile">
+					<abbr title="New Ram"><img tabindex=0 src="./images/new_macro.svg" onclick="newRam()"
+							class="icon" /></abbr>
+					<abbr title="Save ram as Johnny file"><img tabindex=0 src="./images/save_ram.svg"
+							onclick="downloadRam()" class="icon" /></abbr>
+					<abbr title="Load ram file "><img tabindex=0 src="./images/open_ram.svg" onclick="uploadRam()"
+							class="icon" /></abbr>
+				</div>
+				<div id="ramExecution">
+					<abbr title="One macro step"><img tabindex=0 src="./images/macro_step.png" onclick="SingleMacroStep()"
+							class="icon blackborder" /></abbr>
+					<abbr title="Run Programm"><img tabindex=0 src="./images/macro_run.png" onclick="executeProgramm()"
+							class="icon blackborder" /></abbr>
+	
+					<abbr title="Programm execution speed"><input type="range" min="0" max="3000" step="1.0"
+							onchange="updateSpeed()" id="executeSpeedSlider"></abbr>
+					<abbr title="Pause programm"><img tabindex=0 src="./images/macro_pause.png" onclick="pauseProgramm()"
+							class="icon blackborder" /></abbr>
+					<abbr title="Reset"><img tabindex=0 src="./images/reset.png" onclick="resetComputer()"
+							class="icon blackborder" /></abbr>
+				</div>
+			</div>
+			<div id="rightPanel">
+				<div id="controlUnitToggle">
+					<abbr title="show control unit"><img tabindex=0 src="./images/show_control.svg" id="crtIcon"></img
+							tabindex=0></abbr>
+					<abbr title="show control unit"><input id="controlUnitCheckbox" type="checkbox"
+							onchange="ToggleControlUnit()"></abbr>
+				</div>
+				<div id="mcOptions" class="control">
+					<abbr title="new microcode"><img src="./images/new_micro.svg" onclick="resetMicrocode()"
+							class="icon" /></abbr>
+					<abbr title="One micro step"><img tabindex=0 src="./images/micro_step.png" onclick="microStep(true)"
+							class="icon blackborder" /></abbr>
+					<abbr title="Save microcode as mc file"><img tabindex=0 src="./images/save_micro.svg" onclick="downloadMc()"
+							class="icon" /></abbr>
+					<abbr title="load microcode file"><img tabindex=0 src="./images/open_micro.svg" onclick="uploadMc()"
+							class="icon" /></abbr>
+				</div>
+				<div id="recordMcPanel" class="control">
+					<abbr title="Record macrocode"><img tabindex=0 src="./images/record_macro.svg" onclick="aufnahme()"
+							class="icon" /></abbr>
+					<abbr title="Address in micro programm memory of new Macrocode "><input type="number" id="aufnahmeZahl"
+							step="10" min="0" max="200" value="110"></abbr>
+					<abbr title="Name of new macro program"><input type="text" id="aufnahmeName" maxlength="5"
+							value="NN"></abbr>
+					<!--<button onclick="toggleBonsai"></button> how tf did this slip troug TODO: was this neded in any way? -->
+				</div>
 
-
-
-			<abbr title="One macro step"><img tabindex=0 src="./images/macro_step.png" onclick="SingleMacroStep()"
-					class="icon blackborder"></img></abbr>
-			<abbr title="Run Programm"><img tabindex=0 src="./images/macro_run.png" onclick="executeProgramm()"
-					class="icon blackborder"></img></abbr>
-
-			<abbr title="Programm execution speed"><input type="range" min="0" max="3000" step="1.0"
-					onchange="updateSpeed()" id="executeSpeedSlider"></abbr>
-			<abbr title="Pause programm"><img tabindex=0 src="./images/macro_pause.png" onclick="pauseProgramm()"
-					class="icon blackborder"></img></abbr>
-			<abbr title="Reset"><img tabindex=0 src="./images/reset.png" onclick="resetComputer()"
-					class="icon blackborder"></img></abbr>
-		</div>
-
-		<div id="mcOptions" class="control">
-			<abbr title="new microcode"><img src="./images/new_micro.svg" onclick="resetMicrocode()"
-					class="icon"></img></abbr>
-			<abbr title="One micro step"><img tabindex=0 src="./images/micro_step.png" onclick="microStep(true)"
-					class="icon blackborder"></img></abbr>
-			<abbr title="Save microcode as mc file"><img tabindex=0 src="./images/save_micro.svg" onclick="downloadMc()"
-					class="icon"></img></abbr>
-			<abbr title="load microcode file"><img tabindex=0 src="./images/open_micro.svg" onclick="uploadMc()"
-					class="icon"></img></abbr>
-		</div>
-
-
-		<div id="controlUnitToggle">
-			<abbr title="show control unit"><img tabindex=0 src="./images/show_control.svg" id="crtIcon"></img
-					tabindex=0></abbr>
-			<abbr title="show control unit"><input id="controlUnitCheckbox" type="checkbox"
-					onchange="ToggleControlUnit()"></abbr>
-		</div>
-
-
-		<div id="recordMcPanel" class="control">
-			<abbr title="Record macrocode"><img tabindex=0 src="./images/record_macro.svg" onclick="aufnahme()"
-					class="icon"></img></abbr>
-			<abbr title="Address in micro programm memory of new Macrocode "><input type="number" id="aufnahmeZahl"
-					step="10" min="0" max="200" value="110"></abbr>
-			<abbr title="Name of new macro program"><input type="text" id="aufnahmeName" maxlength="5"
-					value="NN"></abbr>
-			<!--<button onclick="toggleBonsai"></button> how tf did this slip troug TODO: was this neded in any way? -->
-		</div>
-
-
-		<!-- Trigger/Open The Modal -->
-		<button id="settings_button">settings</button>
+				<!-- Trigger/Open The Modal -->
+				<button id="settings_button">settings</button>
+			</div>
+		</nav>
 
 
 
@@ -272,7 +269,8 @@ mit dank an Dr. Peter Dauscher
 						href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Developer_guide/Installing#the_install_user_experience"
 						target="_blank"> here</a> to learn how to install Johnny on your device</p>
 				<p>This programm is licenced under the GNU Affero General Public License. You can find the sourcecode at
-					<a href="https://github.com/laubersheini/johnny">https://github.com/laubersheini/johnny</a></p>
+					<a href="https://github.com/laubersheini/johnny">https://github.com/laubersheini/johnny</a>
+				</p>
 				<p>Feel free to report any bugs on the programms <a
 						href="https://github.com/laubersheini/johnny/issues">Github page</a></p>
 			</div>

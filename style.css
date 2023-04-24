@@ -96,11 +96,7 @@ table {
 }
 
 #controlUnitToggle {
-	position: fixed;
-	left: 40vw;
-	top: 2vh;
-
-
+	display: inline-block;
 }
 
 #recordMcPanel {
@@ -119,15 +115,22 @@ table {
 }
 
 #settings_button {
-	position: fixed;
-	left: 90vw;
+	right: 0;
 	top: 2.5vh;
+	position: absolute
+}
 
+#rightPanel {
+	width: 49vw;
+	position: absolute;
+	margin-left: 0.5vw;
+	margin-right: 0.5vw;
+	right: 0;
+}
 
-
-
-
-
+#rightPanel .control {
+	display: inline-block;
+	position: unset;
 }
 
 /*Eigentliches Programm*/
@@ -593,4 +596,9 @@ button[id*="accbutton" i] {
 
 input[type="number"] {
 	min-width: 4ch;
+}
+
+
+#ramFile, #ramExecution {
+	display: inline
 }
