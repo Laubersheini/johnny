@@ -158,8 +158,6 @@ table {
 	left: 5vw;
 	top: 13vh;
 	width: 5vw;
-	height: 1 vh;
-
 }
 
 #DataBusInput {
@@ -167,8 +165,6 @@ table {
 	left: 5vw;
 	top: 93vh;
 	width: 5vw;
-	height: 1 vh;
-
 }
 
 
@@ -234,7 +230,7 @@ table {
 #RamDbButton {
 	position: fixed;
 	left: 23.5vw;
-	top: 84vh;
+	top: 82vh;
 	transform: translate(-50%, 0%);
 
 
@@ -243,7 +239,7 @@ table {
 #DbRamButton {
 	position: fixed;
 	left: 16.5vw;
-	top: 84vh;
+	top: 86vh;
 	transform: translate(-50%, 0%);
 
 }
@@ -580,4 +576,12 @@ table {
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+button[id*="accbutton" i] {
+	min-width: fit-content !important;
+}
+
+input[type="number"] {
+	min-width: 4ch;
 }
