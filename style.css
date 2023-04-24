@@ -389,6 +389,7 @@ table {
 	left: 65.5vw;
 	top: 44vh;
 	width: 5vw;
+	min-width: fit-content;
 }
 
 
@@ -407,9 +408,10 @@ table {
 
 #IncPc0Button {
 	position: fixed;
-	left: 65.5vw;
+	right: 28.5vw;
 	top: 47vh;
 	width: 5vw;
+	min-width: fit-content;
 }
 
 #IncPc0Highlight {
