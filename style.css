@@ -513,8 +513,15 @@ table {
 	position: fixed;
 	left: 8vw;
 	top: 23vh;
-	height: 60vh;
+	height: 56.7vh;
 	width: 25vw;
+	overflow: auto;
+
+	scrollbar-color: #393e46 #959595;
+}
+
+#RamTBody {
+	transform: translateY(1.2em);
 }
 
 
