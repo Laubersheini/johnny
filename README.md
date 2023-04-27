@@ -4,5 +4,6 @@ Simulation of a von neumann arcitecture
 The programm is hosted by inf-schule.de
 https://inf-schule.de/content/7_rechner/3_johnny/johnny2/
 
-This repository contains some style fixes reagrding position and resizing the window.
-This page can be found at [tobiasma.github.io/johnny](tobiasma.github.io/johnny).
+With the hosting at inf-schule.de it does take some time for them to apply new versions and bugfixes. As such there is also a Github page at:
+https://laubersheini.github.io/johnny
+which automatically updates as soon as i make a commit to the master branch of this repo so it should always be more up to date.
