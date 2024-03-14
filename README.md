@@ -1,3 +1,10 @@
+This version is no longer actively maintained.
+TobisMa has made significant changes, that fixes many bugs I simply ingnored. This more up to date version is available at:
+https://tobisma.github.io/johnny/
+
+The code is available at:
+https://github.com/TobisMa/johnny/tree/master
+
 # johnny
 Simulation of a von neumann arcitecture
 
