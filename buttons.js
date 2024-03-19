@@ -16,7 +16,7 @@ function DbRamClick(){
 	DbRam();
 	FadeIn(0);
 	setTimeout(FadeOut, blockFadeoutTime,0)
-	}
+}
 
 
 function RamDbClick(){

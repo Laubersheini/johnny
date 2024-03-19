@@ -23,9 +23,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 mit dank an Dr. Peter Dauscher
 -->
 <html lang="en">
+
 <head>
 	<meta name="viewport" content="width=device-width, height=device-height,initial-scale=1.0">
-	<meta charset="utf-8"/>
+	<meta charset="utf-8" />
 	<link rel="stylesheet" href="./ios-pwa-promt/promt_pwa.css">
 	<link rel="stylesheet" type="text/css" href="./style.css">
 	<link rel="manifest" href="./johnny.webmanifest">
@@ -33,337 +34,322 @@ mit dank an Dr. Peter Dauscher
 	<title>Johnny 2.0</title>
 
 	<script>
-	var LoadStart = new Date().getTime();//this is so that the splash screen is always on for the same time
+		var LoadStart = new Date().getTime();//this is so that the splash screen is always on for the same time
 
-	if ('serviceWorker' in navigator) {
-  	navigator.serviceWorker.register('./service-worker.js'); //for testing this should be commented out so the reloading does take the cached conntent
-	}
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('./service-worker.js'); //for testing this should be commented out so the reloading does take the cached conntent
+		}
 
 
 	</script>
 </head>
 
 <body onload="initialize()">
-<div id="startscreen">
-<p style="  font-size:15vmin ">Johnny 2.0</p>
-<p style="  font-size:7vmin " id="loading">Loading</p>
-<p style="  font-size:6vmin ">Simulation of a simplified Von Neumann Computer</p>
-<p style="  font-size:4vmin">David Laubersheimer</p>
-<p style="  font-size:4vmin ">2019-2021</p>
-<p style="  font-size:4vmin">Peter Dauscher</p>
-<p style="  font-size:4vmin ">2009-2014</p>
-</div>
-
-<div id="programm" style="display : none">
-	<!-- Bilder die die Datenbewegung anzeigen (reinfolge nicht verändern!) -->
-	<img src="./images/datamovement/dbram.png"  class="dataMovement"></img>
-	<img src="./images/datamovement/ramdb.png"  class="dataMovement"></img>
-	<img src="./images/datamovement/dbins.png"  class="dataMovement"></img>
-	<img src="./images/datamovement/dbacc.png"  class="dataMovement"></img>
-	<img src="./images/datamovement/accdb.png"  class="dataMovement"></img>
-	<img src="./images/datamovement/insmc.png"  class="dataMovement"></img>
-	<img src="./images/datamovement/insad.png"  class="dataMovement"></img>
-	<img src="./images/datamovement/inspc.png"  class="dataMovement"></img>
-	<img src="./images/datamovement/pcad.png"  class="dataMovement"></img>
-	<img src="./images/datamovement/equalZero.png"  class="dataMovement" style="display:block"></img>
-	<img src="./images/datamovement/crtCover.png" class="dataMovement" style="display:block"></img>
-	<div class="dataMovement" id="NullaccHighlight"></div>
-	<div class="dataMovement" id="IncaccHighlight"></div>
-	<div class="dataMovement" id="DecaccHighlight"></div>
-	<div class="dataMovement" id="NullMcHighlight"></div>
-	<div class="dataMovement" id="HaltButtonHighlight"></div>
-	<div class="dataMovement" id="IncPc0Highlight"></div>
-	<div class="dataMovement" id="IncPcHighlight"></div>
-
-
-
-
-	<!--Bilder der Kopfzeile -->
-	<div id="ramOptions">
-	<abbr title="New Ram"><img tabindex=0 src="./images/new_macro.svg" onclick="newRam()" class="icon" ></img></abbr>
-	<abbr title="Save ram as Johnny file"><img tabindex=0 src="./images/save_ram.svg" onclick="downloadRam()" class="icon" ></img></abbr>
-	<abbr title="Load ram file "><img tabindex=0 src="./images/open_ram.svg"  onclick="uploadRam()" class="icon" ></img></abbr>
-	<img src= "./images/platzhalter.png"class="icon"</img> <!-- dient als abstandshalter -->
-	<img src= "./images/platzhalter.png"class="icon"</img>
-
-
-
-	<abbr title="One macro step"><img tabindex=0 src="./images/macro_step.png"  onclick="SingleMacroStep()" class="icon blackborder"></img></abbr>
-	<abbr title="Run Programm"><img tabindex=0 src="./images/macro_run.png"  onclick="executeProgramm()" class="icon blackborder"  ></img></abbr>
-
-	<abbr title="Programm execution speed"><input type="range" min="0" max="3000" step="1.0" onchange="updateSpeed()" id="executeSpeedSlider"></abbr>
-	<abbr title="Pause programm"><img tabindex=0 src="./images/macro_pause.png"  onclick="pauseProgramm()" class="icon blackborder"  ></img></abbr>
-	<abbr title="Reset"><img tabindex=0 src="./images/reset.png"  onclick="resetComputer()"  class="icon blackborder"  ></img></abbr>
+	<div id="startscreen">
+		<p style="  font-size:15vmin ">Johnny 2.0</p>
+		<p style="  font-size:7vmin " id="loading">Loading</p>
+		<p style="  font-size:6vmin ">Simulation of a simplified Von Neumann Computer</p>
+		<p style="  font-size:4vmin">David Laubersheimer</p>
+		<p style="  font-size:4vmin ">2019-2021</p>
+		<p style="  font-size:4vmin">Peter Dauscher</p>
+		<p style="  font-size:4vmin ">2009-2014</p>
 	</div>
 
-	<div id="mcOptions" class="control">
-	<abbr title="new microcode"><img src="./images/new_micro.svg"  onclick="resetMicrocode()" class="icon" ></img></abbr>
-	<abbr title="One micro step"><img tabindex=0 src="./images/micro_step.png"  onclick="microStep(true)" class="icon blackborder" ></img></abbr>
-	<abbr title="Save microcode as mc file"><img tabindex=0 src="./images/save_micro.svg" onclick="downloadMc()" class="icon" ></img></abbr>
-	<abbr title="load microcode file"><img tabindex=0 src="./images/open_micro.svg"  onclick="uploadMc()" class="icon"></img></abbr>
-	</div>
-
-
-	<div id="controlUnitToggle">
-	<abbr title="show control unit"><img tabindex=0 src="./images/show_control.svg"  id="crtIcon"  ></img tabindex=0></abbr>
-	<abbr title="show control unit"><input id="controlUnitCheckbox" type="checkbox" onchange="ToggleControlUnit()"></abbr>
-	</div>
-
-
-	<div id="recordMcPanel" class="control">
-	<abbr title="Record macrocode"><img tabindex=0 src="./images/record_macro.svg"  onclick="aufnahme()" class="icon" ></img></abbr>
-	<abbr title="Address in micro programm memory of new Macrocode "><input type="number" id="aufnahmeZahl"   step="10" min="0" max="200" value="110"></abbr>
-	<abbr title="Name of new macro program"><input type="text" id="aufnahmeName"  maxlength="5" value="NN"></abbr>
-	<!--<button onclick="toggleBonsai"></button> how tf did this slip troug TODO: was this neded in any way? -->
-	</div>
-
-
-	<!-- Trigger/Open The Modal -->
-	<button id="settings_button">settings</button>
+	<div id="programm" style="display : none">
+		<!-- Bilder die die Datenbewegung anzeigen (reinfolge nicht verändern!) -->
+		<img src="./images/datamovement/dbram.png" class="dataMovement" />
+		<img src="./images/datamovement/ramdb.png" class="dataMovement" />
+		<img src="./images/datamovement/dbins.png" class="dataMovement" />
+		<img src="./images/datamovement/dbacc.png" class="dataMovement" />
+		<img src="./images/datamovement/accdb.png" class="dataMovement" />
+		<img src="./images/datamovement/insmc.png" class="dataMovement" />
+		<img src="./images/datamovement/insad.png" class="dataMovement" />
+		<img src="./images/datamovement/inspc.png" class="dataMovement" />
+		<img src="./images/datamovement/pcad.png" class="dataMovement" />
+		<img src="./images/datamovement/equalZero.png" class="dataMovement" style="display:block" />
+		<img src="./images/datamovement/crtCover.png" class="dataMovement" style="display:block" />
+		<div class="dataMovement" id="NullaccHighlight"></div>
+		<div class="dataMovement" id="IncaccHighlight"></div>
+		<div class="dataMovement" id="DecaccHighlight"></div>
+		<div class="dataMovement" id="NullMcHighlight"></div>
+		<div class="dataMovement" id="HaltButtonHighlight"></div>
+		<div class="dataMovement" id="IncPc0Highlight"></div>
+		<div class="dataMovement" id="IncPcHighlight"></div>
 
 
 
 
-	<input type="number" id="AddressBusInput" min="0" max="999">
-	<input type="number" id="DataBusInput">
-	<p id="AddressBus">000</p>
-	<p id="DataBus">00000</p>
-	<p id="Accumulator">00000</p>
-	<p id="InstructionalRegister" class="control"><span style="color:#E5002D; font-size:3vmin" id="InsHi">00</span>.<span style="color:#207DFF; font-size:3vmin" id="InsLow">000</span></p>
-	<p id="ProgrammCounter" class="control">000</p>
-	<p id="MicoCodeCounter" class="control">000</p>
-	<p id="programmCounterText" class="control">Programm Counter</p>
-	<p id="equalZeroText">=0?</p>
-	<abbr title="set Data Bus"><button onclick="ManuellDb()" id="DbInputButton">ManuellDb</button> </abbr>
-	<abbr title="set Address Bus"><button onclick="ManuellAB()" id="ABInputButton">ManuellAb</button> </abbr>
+		<!--Bilder der Kopfzeile -->
+		<nav id="control-nav">
+			<div id="ramOptions">
+				<div id="ramFile">
+					<abbr title="New Ram"><img tabindex=0 src="./images/new_macro.svg" onclick="newRam()"
+							class="icon" /></abbr>
+					<abbr title="Save ram as Johnny file"><img tabindex=0 src="./images/save_ram.svg"
+							onclick="downloadRam()" class="icon" /></abbr>
+					<abbr title="Load ram file "><img tabindex=0 src="./images/open_ram.svg" onclick="uploadRam()"
+							class="icon" /></abbr>
+				</div>
+				<div id="ramExecution">
+					<abbr title="One macro step"><img tabindex=0 src="./images/macro_step.png"
+							onclick="SingleMacroStep()" class="icon blackborder" /></abbr>
+					<abbr title="Run Programm"><img tabindex=0 src="./images/macro_run.png" onclick="executeProgramm()"
+							class="icon blackborder" /></abbr>
 
-	<button onclick="RamDbClick()" id="RamDbButton">ram-->db</button>
-	<button onclick="DbRamClick()" id="DbRamButton">db-->ram</button>
-	<button onclick="DbAccClick()" id="DbAccButton">db-->acc</button>
-	<button onclick="AccDbClick()" id="AccDbButton">acc-->db</button>
-	<button onclick="NullAccClick()" id="NullAccButton" class="hiddenInBonsai">acc=0</button>
-	<button onclick="IncAccClick()" id="IncAccButton">acc++</button>
-	<button onclick="DecAccClick()" id="DecAccButton">acc--</button>
-	<button onclick="AddAccClick()" id="AddAccButton" class="hiddenInBonsai">plus</button>
-	<button onclick="SubAccClick()" id="SubAccButton" class="hiddenInBonsai">minus</button>
-	<button onclick="DbInsClick()" id="DbInsButton" class="control">db-->ins</button>
-	<button onclick="InsMcClick()" id="InsMcButton" class="control">ins-->mc</button>
-	<button onclick="InsAdClick()" id="InsAbButton" class="control">ins-->ab</button>
-	<button onclick="InsPcClick()" id="InsPcButton" class="control" >ins-->pc</button>
-	<button onclick="PcAdClick()" id="PcAbButton" class="control">pc-->ab</button>
-	<button onclick="NullMcClick()" id="NullMcButton" class="control">mc:=0</button>
-	<button onclick="IncPcClick()" id="IncPcButton" class="control">pc++</button>
-	<button onclick="IncPc0Click()" id="IncPc0Button" class="control">=0:pc++</button>
-	<button onclick="HaltClick()" id="HaltButton" class="control">stop</button>
-
-
-
-	<!--nicht entfernen onclick der Bilder greift hierdrauf zu -->
-	<input type='file' accept='.mc' id='microcodefile' style="display:none">
-	<input type='file' accept='.ram' id='ramfile'style="display:none">
-
-
-	<!-- Scollbare Tabelle -->
-<div id="RamDiv">
-
-
-	<table cellspacing="0" cellpadding="0" border="0" width="100%">
-  <tr>
-    <td>
-       <table cellspacing="0" cellpadding="0" border="1" width="100%" >
-         <tr style="color:#969696;background-color:#969696">
-            <th width=25%>Address</th>
-				<th width=25%>Data</th>
-				<th width=25%>Asm</th>
-				<th width=25%>Opnd</th>
-         </tr>
-       </table>
-    </td>
-  </tr>
-  <tr>
-    <td>
-       <div style="width:23vw; height:50vh; overflow:auto;" id="innerRamDiv" >
-         <table cellspacing="0" cellpadding="1" border="1" width="100%">
-					<tbody id="RamTBody">
-						<!-- hier wird in table.js die Tabelle eingefügt-->
-					</tbody>
-         </table>
-
-
-
-
-
-
-       </div>
-    </td>
-  </tr>
-</table>
-
-
-  </div>
-
-
-
-<div id="MicroCodeDiv" class="control">
-
-
-	<table cellspacing="0" cellpadding="0" border="0" width="100%" >
-  <tr>
-    <td>
-       <table cellspacing="0" cellpadding="1" border="1" width="100%" >
-
-       </table>
-    </td>
-  </tr>
-  <tr>
-    <td>
-       <div style="width:15vw; height:28vh; overflow:auto;" id="testdiv">
-         <table cellspacing="0" cellpadding="1" border="1" width="100%">
-					<tbody id="McTBody">
-
-					</tbody>
-         </table>
-       </div>
-    </td>
-  </tr>
-</table>
-  </div>
-
-
-
-<div id="RamEingabe">
-<p></p>
-<input type="Number" id="RamInput" step=0.001>
-<select id="CommandSelect" onchange="CommandSelectChange()">
-</select>
-<button onclick="ManuellRam()" id="RamInputButton">write</button>
-<p></p>
-</div>
-
-
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
- <!-- Modal content -->
- <div class="modal-content">
-	 <span class="close">&times;</span>
-	 <button id="bonsaiModeButton" onclick="toggleBonsai()">bonsai mode</button>
-	 <p>Johnny can also be installed as an app. Click<a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Developer_guide/Installing#the_install_user_experience"  target="_blank"> here</a> to learn how to install Johnny on your device</p>
-	 <p>This programm is licenced under the GNU Affero General Public License. You can find the sourcecode at <a href="https://github.com/laubersheini/johnny">https://github.com/laubersheini/johnny</a></p>
-	 <p>Feel free to report any bugs on the programms <a href="https://github.com/laubersheini/johnny/issues">Github page</a></p>
- </div>
-
-</div>
-
-
-
-<!--This is for showing a hint for IOS users that they can install Johnny as a PWA-->
-<div
-	class = "hidden pwaPromptOverlay visibilityClass iOSClass iOSPWA-overlay "
-	aria-label="Close"
-	role="button"
-	onClick= "iosPromtPwa.dismissPrompt()"
-
-></div>
-<div
-	class="hidden pwaPrompt visibilityClass iOSClass iOSPWA-container "
-
->
-	<div class="pwaPromptHeader iOSPWA-header">
-		<p
-			id="pwa-prompt-title"
-			class="pwaPromptTitle iOSPWA-title"
-		>
-			Add to Home Screen
-		</p>
-		<button
-			class="pwaPromptCancel iOSPWA-cancel"
-			onClick=iosPromtPwa.dismissPrompt()
-		>
-			Cancel
-		</button>
-	</div>
-	<div class="pwaPromptBody iOSPWA-body">
-		<div class="pwaPromptDescription iOSPWA-description">
-			<p
-				id="pwa-prompt-description"
-				class="pwaPromptCopy iOSPWA-description-copy"
-			>
-				Add Johnny to your home screen to use it in fullscreen and while offline.
-			</p>
-		</div>
-	</div>
-	<div class="pwaPromptInstruction iOSPWA-steps">
-		<div class="pwaPromptInstructionStep iOSPWA-step1">
-			<div class="pwaPromptShareIcon iOSPWA-step1-icon">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					className={className}
-					viewBox="0 0 120 169">
-					<g fill="currentColor">
-						<path d="M60 0l28 28-2 2a586 586 0 0 0-4 4L64 15v90h-8V15L38 34l-4-4-2-2L60 0z" />
-						<path d="M0 49h44v8H8v104h104V57H76v-8h44v120H0V49z" />
-					</g>
-				</svg>
-
-
-		</div>
-			<p
-				class="pwaPromptCopy styles.bold iOSPWA-step1-copy"
-			>
-				1) Press the 'Share' button on the menu bar below.
-			</p>
-		</div>
-		<div class="pwaPromptInstructionStep iOSPWA-step2">
-			<div class ="pwaPromptHomeIcon iOSPWA-step2-icon">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					className={className}
-					viewBox="55.99425507 31.98999977 157.76574707 157.76371765"
-				>
-					<path
-						fill="#58595b"
-						d="M90.49 32.83a54.6 54.6 0 019.55-.84c23.98.03 47.96 0 71.94.01 8.5.07 17.3 1.74 24.4 6.65 10.94 7.28 16.52 20.54 17.35 33.3.06 26.03 0 52.06.03 78.08 0 10.16-3.59 20.56-10.95 27.73-7.93 7.61-18.94 11.43-29.79 11.98-25.71.03-51.42 0-77.12.01-10.37-.11-21.01-3.77-28.17-11.48-8.22-8.9-11.72-21.29-11.73-33.21.01-23.03-.03-46.05.02-69.07-.01-9.14 1.33-18.71 6.65-26.4 6.21-9.4 16.97-14.79 27.82-16.76m38.18 41.09c-.05 10.25.01 20.5 0 30.75-9.58-.03-19.16.02-28.75-.04-2.27.08-4.98-.25-6.68 1.61-2.84 2.34-2.75 7.12.01 9.48 1.8 1.69 4.46 1.57 6.75 1.64 9.56-.04 19.12-.01 28.67-.03.02 10.24-.06 20.48.01 30.72-.14 2.66 1.36 5.4 3.95 6.3 3.66 1.66 8.52-1.13 8.61-5.23.26-10.59.02-21.2.09-31.79 9.88 0 19.76.02 29.64.01 2.74.12 5.85-.67 7.14-3.34 2.23-3.75-.61-9.34-5.08-9.29-10.57-.14-21.14-.01-31.7-.04-.01-10.25.04-20.49 0-30.74.3-3.5-2.66-7.09-6.3-6.79-3.65-.33-6.66 3.26-6.36 6.78z"
-					/>
-					<path
-						fill="transparent"
-						d="M128.67 73.92c-.3-3.52 2.71-7.11 6.36-6.78 3.64-.3 6.6 3.29 6.3 6.79.04 10.25-.01 20.49 0 30.74 10.56.03 21.13-.1 31.7.04 4.47-.05 7.31 5.54 5.08 9.29-1.29 2.67-4.4 3.46-7.14 3.34-9.88.01-19.76-.01-29.64-.01-.07 10.59.17 21.2-.09 31.79-.09 4.1-4.95 6.89-8.61 5.23-2.59-.9-4.09-3.64-3.95-6.3-.07-10.24.01-20.48-.01-30.72-9.55.02-19.11-.01-28.67.03-2.29-.07-4.95.05-6.75-1.64-2.76-2.36-2.85-7.14-.01-9.48 1.7-1.86 4.41-1.53 6.68-1.61 9.59.06 19.17.01 28.75.04.01-10.25-.05-20.5 0-30.75z"
-					/>
-				</svg>
+					<abbr title="Programm execution speed"><input type="range" min="0" max="3000" step="1.0"
+							onchange="updateSpeed()" id="executeSpeedSlider"></abbr>
+					<abbr title="Pause programm"><img tabindex=0 src="./images/macro_pause.png"
+							onclick="pauseProgramm()" class="icon blackborder" /></abbr>
+					<abbr title="Reset"><img tabindex=0 src="./images/reset.png" onclick="resetComputer()"
+							class="icon blackborder" /></abbr>
+				</div>
 			</div>
-			<p
-				class="pwaPromptCopy styles.bold iOSPWA-step2-copy"
-			>
-			2) Press 'Add to Home Screen'.
-			</p>
+			<div id="rightPanel">
+				<div id="controlUnitToggle">
+					<abbr title="show control unit"><img tabindex=0 src="./images/show_control.svg" id="crtIcon"></img
+							tabindex=0></abbr>
+					<abbr title="show control unit"><input id="controlUnitCheckbox" type="checkbox"
+							onchange="ToggleControlUnit()"></abbr>
+				</div>
+				<div id="mcOptions" class="control">
+					<abbr title="new microcode"><img src="./images/new_micro.svg" onclick="resetMicrocode()"
+							class="icon" /></abbr>
+					<abbr title="One micro step"><img tabindex=0 src="./images/micro_step.png" onclick="microStep(true)"
+							class="icon blackborder" /></abbr>
+					<abbr title="Save microcode as mc file"><img tabindex=0 src="./images/save_micro.svg"
+							onclick="downloadMc()" class="icon" /></abbr>
+					<abbr title="load microcode file"><img tabindex=0 src="./images/open_micro.svg" onclick="uploadMc()"
+							class="icon" /></abbr>
+				</div>
+				<div id="recordMcPanel" class="control">
+					<abbr title="Record macrocode"><img tabindex=0 src="./images/record_macro.svg" onclick="aufnahme()"
+							class="icon" /></abbr>
+					<abbr title="Address in micro programm memory of new Macrocode "><input type="number"
+							id="aufnahmeZahl" step="10" min="0" max="200" value="110"></abbr>
+					<abbr title="Name of new macro program"><input type="text" id="aufnahmeName" maxlength="5"
+							value="NN"></abbr>
+					<!--<button onclick="toggleBonsai"></button> how tf did this slip troug TODO: was this neded in any way? -->
+				</div>
+
+				<!-- Trigger/Open The Modal -->
+				<button id="settings_button">settings</button>
+			</div>
+		</nav>
+
+
+
+
+		<input type="number" id="AddressBusInput" min="0" max="999">
+		<input type="number" id="DataBusInput">
+		<p id="AddressBus">000</p>
+		<p id="DataBus">00000</p>
+		<p id="Accumulator">00000</p>
+		<p id="InstructionalRegister" class="control"><span style="color:#E5002D; font-size:3vmin"
+				id="InsHi">00</span>.<span style="color:#207DFF; font-size:3vmin" id="InsLow">000</span></p>
+		<p id="ProgrammCounter" class="control">000</p>
+		<p id="MicoCodeCounter" class="control">000</p>
+		<p id="programmCounterText" class="control">Programm Counter</p>
+		<p id="equalZeroText">=0?</p>
+		<abbr title="set Data Bus"><button onclick="ManuellDb()" id="DbInputButton">ManuellDb</button> </abbr>
+		<abbr title="set Address Bus"><button onclick="ManuellAB()" id="ABInputButton">ManuellAb</button> </abbr>
+
+		<button onclick="RamDbClick()" id="RamDbButton">ram-->db</button>
+		<button onclick="DbRamClick()" id="DbRamButton">db-->ram</button>
+		<button onclick="DbAccClick()" id="DbAccButton">db-->acc</button>
+		<button onclick="AccDbClick()" id="AccDbButton">acc-->db</button>
+		<button onclick="NullAccClick()" id="NullAccButton" class="hiddenInBonsai">acc=0</button>
+		<button onclick="IncAccClick()" id="IncAccButton">acc++</button>
+		<button onclick="DecAccClick()" id="DecAccButton">acc--</button>
+		<button onclick="AddAccClick()" id="AddAccButton" class="hiddenInBonsai">plus</button>
+		<button onclick="SubAccClick()" id="SubAccButton" class="hiddenInBonsai">minus</button>
+		<button onclick="DbInsClick()" id="DbInsButton" class="control">db-->ins</button>
+		<button onclick="InsMcClick()" id="InsMcButton" class="control">ins-->mc</button>
+		<button onclick="InsAdClick()" id="InsAbButton" class="control">ins-->ab</button>
+		<button onclick="InsPcClick()" id="InsPcButton" class="control">ins-->pc</button>
+		<button onclick="PcAdClick()" id="PcAbButton" class="control">pc-->ab</button>
+		<button onclick="NullMcClick()" id="NullMcButton" class="control">mc:=0</button>
+		<button onclick="IncPcClick()" id="IncPcButton" class="control">pc++</button>
+		<button onclick="IncPc0Click()" id="IncPc0Button" class="control">=0:pc++</button>
+		<button onclick="HaltClick()" id="HaltButton" class="control">stop</button>
+
+
+
+		<!--nicht entfernen onclick der Bilder greift hierdrauf zu -->
+		<input type='file' accept='.mc' id='microcodefile' style="display:none">
+		<input type='file' accept='.ram' id='ramfile' style="display:none">
+
+
+		<!-- Scollbare Tabelle -->
+		<div id="RamDiv">
+
+
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">
+				<tr>
+					<td>
+						<table cellspacing="0" cellpadding="0" border="1" width="100%">
+							<tr style="color:#969696;background-color:#969696; position: sticky">
+								<th width=25% style="text-overflow: clip; overflow: hidden;">Address</th>
+								<th width=25% style="text-overflow: clip; overflow: hidden;">Data</th>
+								<th width=25% style="text-overflow: clip; overflow: hidden;">Asm</th>
+								<th width=25% style="text-overflow: clip; overflow: hidden;">Opnd</th>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div style="height:54.2vh;" id="innerRamDiv">
+							<table cellspacing="0" cellpadding="1" border="1" width="100%">
+								<tbody id="RamTBody">
+									<!-- hier wird in table.js die Tabelle eingefügt-->
+								</tbody>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+
+
 		</div>
+
+
+
+		<div id="MicroCodeDiv" class="control">
+
+
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">
+				<tr>
+					<td>
+						<table cellspacing="0" cellpadding="1" border="1" width="100%">
+
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div style="width:15vw; height:28vh; overflow:auto;" id="testdiv">
+							<table cellspacing="0" cellpadding="1" border="1" width="100%">
+								<tbody id="McTBody">
+
+								</tbody>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+
+
+		<div id="RamEingabe">
+			<p></p>
+			<input type="Number" id="RamInput" step=0.001>
+			<select id="CommandSelect" onchange="CommandSelectChange()">
+			</select>
+			<button onclick="ManuellRam()" id="RamInputButton">write</button>
+			<p></p>
+		</div>
+
+
+
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
+
+			<!-- Modal content -->
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<button id="bonsaiModeButton" onclick="toggleBonsai()">bonsai mode</button>
+				<p>Johnny can also be installed as an app. Click<a
+						href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Developer_guide/Installing#the_install_user_experience"
+						target="_blank"> here</a> to learn how to install Johnny on your device</p>
+				<p>This programm is licenced under the GNU Affero General Public License. You can find the sourcecode at
+					<a href="https://github.com/laubersheini/johnny">https://github.com/laubersheini/johnny</a>
+				</p>
+				<p>Feel free to report any bugs on the programms <a
+						href="https://github.com/laubersheini/johnny/issues">Github page</a></p>
+			</div>
+
+		</div>
+
+
+
+		<!--This is for showing a hint for IOS users that they can install Johnny as a PWA-->
+		<div class="hidden pwaPromptOverlay visibilityClass iOSClass iOSPWA-overlay " aria-label="Close" role="button"
+			onClick="iosPromtPwa.dismissPrompt()"></div>
+		<div class="hidden pwaPrompt visibilityClass iOSClass iOSPWA-container ">
+			<div class="pwaPromptHeader iOSPWA-header">
+				<p id="pwa-prompt-title" class="pwaPromptTitle iOSPWA-title">
+					Add to Home Screen
+				</p>
+				<button class="pwaPromptCancel iOSPWA-cancel" onClick=iosPromtPwa.dismissPrompt()>
+					Cancel
+				</button>
+			</div>
+			<div class="pwaPromptBody iOSPWA-body">
+				<div class="pwaPromptDescription iOSPWA-description">
+					<p id="pwa-prompt-description" class="pwaPromptCopy iOSPWA-description-copy">
+						Add Johnny to your home screen to use it in fullscreen and while offline.
+					</p>
+				</div>
+			</div>
+			<div class="pwaPromptInstruction iOSPWA-steps">
+				<div class="pwaPromptInstructionStep iOSPWA-step1">
+					<div class="pwaPromptShareIcon iOSPWA-step1-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 120 169">
+							<g fill="currentColor">
+								<path d="M60 0l28 28-2 2a586 586 0 0 0-4 4L64 15v90h-8V15L38 34l-4-4-2-2L60 0z" />
+								<path d="M0 49h44v8H8v104h104V57H76v-8h44v120H0V49z" />
+							</g>
+						</svg>
+
+
+					</div>
+					<p class="pwaPromptCopy styles.bold iOSPWA-step1-copy">
+						1) Press the 'Share' button on the menu bar below.
+					</p>
+				</div>
+				<div class="pwaPromptInstructionStep iOSPWA-step2">
+					<div class="pwaPromptHomeIcon iOSPWA-step2-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" className={className}
+							viewBox="55.99425507 31.98999977 157.76574707 157.76371765">
+							<path fill="#58595b"
+								d="M90.49 32.83a54.6 54.6 0 019.55-.84c23.98.03 47.96 0 71.94.01 8.5.07 17.3 1.74 24.4 6.65 10.94 7.28 16.52 20.54 17.35 33.3.06 26.03 0 52.06.03 78.08 0 10.16-3.59 20.56-10.95 27.73-7.93 7.61-18.94 11.43-29.79 11.98-25.71.03-51.42 0-77.12.01-10.37-.11-21.01-3.77-28.17-11.48-8.22-8.9-11.72-21.29-11.73-33.21.01-23.03-.03-46.05.02-69.07-.01-9.14 1.33-18.71 6.65-26.4 6.21-9.4 16.97-14.79 27.82-16.76m38.18 41.09c-.05 10.25.01 20.5 0 30.75-9.58-.03-19.16.02-28.75-.04-2.27.08-4.98-.25-6.68 1.61-2.84 2.34-2.75 7.12.01 9.48 1.8 1.69 4.46 1.57 6.75 1.64 9.56-.04 19.12-.01 28.67-.03.02 10.24-.06 20.48.01 30.72-.14 2.66 1.36 5.4 3.95 6.3 3.66 1.66 8.52-1.13 8.61-5.23.26-10.59.02-21.2.09-31.79 9.88 0 19.76.02 29.64.01 2.74.12 5.85-.67 7.14-3.34 2.23-3.75-.61-9.34-5.08-9.29-10.57-.14-21.14-.01-31.7-.04-.01-10.25.04-20.49 0-30.74.3-3.5-2.66-7.09-6.3-6.79-3.65-.33-6.66 3.26-6.36 6.78z" />
+							<path fill="transparent"
+								d="M128.67 73.92c-.3-3.52 2.71-7.11 6.36-6.78 3.64-.3 6.6 3.29 6.3 6.79.04 10.25-.01 20.49 0 30.74 10.56.03 21.13-.1 31.7.04 4.47-.05 7.31 5.54 5.08 9.29-1.29 2.67-4.4 3.46-7.14 3.34-9.88.01-19.76-.01-29.64-.01-.07 10.59.17 21.2-.09 31.79-.09 4.1-4.95 6.89-8.61 5.23-2.59-.9-4.09-3.64-3.95-6.3-.07-10.24.01-20.48-.01-30.72-9.55.02-19.11-.01-28.67.03-2.29-.07-4.95.05-6.75-1.64-2.76-2.36-2.85-7.14-.01-9.48 1.7-1.86 4.41-1.53 6.68-1.61 9.59.06 19.17.01 28.75.04.01-10.25-.05-20.5 0-30.75z" />
+						</svg>
+					</div>
+					<p class="pwaPromptCopy styles.bold iOSPWA-step2-copy">
+						2) Press 'Add to Home Screen'.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<script src="./ios-pwa-promt/showPromt.js" charset="utf-8"></script>
+
+		<script type="text/javascript" src="./promt_pwa.js"></script>
+		<script type="text/javascript" src="./viewport-units-buggyfill/viewport-units-buggyfill.js"></script>
+		<script type="text/javascript" src="./script.js"></script>
+		<script type="text/javascript" src="./microcode.js"></script>
+		<script type="text/javascript" src="./table.js"></script>
+		<script type="text/javascript" src="./buttons.js"></script>
+		<script type="text/javascript" src="./writing.js"></script>
+		<script type="text/javascript" src="./bonsai.js"></script>
+		<script type="text/javascript" src="./settings.js"></script>
+		<script>{
+				let ua = window.navigator.userAgent;
+				//	if( !!ua.match(/iPad/i) || !!ua.match(/iPhone/i)){
+				//this apperantly also fixes chrome mobile?
+				if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) { //this seems to detect mobile browsers(which need this the most )
+					viewportUnitsBuggyfill.init({ force: true }); //does this make it worse for everyone? almost for sure but ipads are the thing for schools now :(
+				}
+				// TODO simple bug fix for the elements at the bottom. Won't display them onload then
+				ToggleControlUnit();
+				ToggleControlUnit();
+
+			}
+		</script>
 	</div>
-</div>
-
-<script src="./ios-pwa-promt/showPromt.js" charset="utf-8"></script>
-
-<script type="text/javascript" src="./promt_pwa.js"></script>
-<script type="text/javascript" src="./viewport-units-buggyfill/viewport-units-buggyfill.js"></script>
-<script type="text/javascript" src="./script.js"></script>
-<script type="text/javascript" src="./microcode.js"></script>
-<script type="text/javascript" src="./table.js"></script>
-<script type="text/javascript" src="./buttons.js"></script>
-<script type="text/javascript" src="./writing.js"></script>
-<script type="text/javascript" src="./bonsai.js"></script>
-<script type="text/javascript" src="./settings.js"></script>
-<script>{
-		let ua = window.navigator.userAgent;
-	//	if( !!ua.match(/iPad/i) || !!ua.match(/iPhone/i)){
-//this apperantly also fixes chrome mobile?
-    if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){ //this seems to detect mobile browsers(which need this the most )
-		viewportUnitsBuggyfill.init({force: true}); //does this make it worse for everyone? almost for sure but ipads are the thing for schools now :(
-		}
-
-
-}
-</script>
-</div>
 
 
 </body>
